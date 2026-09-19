@@ -77,3 +77,6 @@ test-request.json
 tool-test.json
 test-routing.ps1
 ui-inspection*.png
+
+scripts/use-tokli.ps1
+scripts/use-void.ps1
