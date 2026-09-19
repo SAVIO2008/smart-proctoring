@@ -1,0 +1,1879 @@
+[
+  {
+    "_id": "9pYoiUnfVDGr69et1uaVvQ",
+    "type": "revoked_jti",
+    "created_at": "2026-09-18T13:36:33.831648+00:00"
+  },
+  {
+    "_id": "f0-veaLvwkkr3VUq3SBRmw",
+    "type": "revoked_jti",
+    "created_at": "2026-09-18T13:38:23.634769+00:00"
+  },
+  {
+    "_id": "qC1lP8gadp9XC4ENJABeqw",
+    "type": "revoked_jti",
+    "created_at": "2026-09-18T13:39:04.173907+00:00"
+  },
+  {
+    "_id": "-OIGzM79MQRshE6jKLho1g",
+    "type": "revoked_jti",
+    "created_at": "2026-09-18T13:46:25.499567+00:00"
+  },
+  {
+    "_id": "0YcL3tPAApTFU9XTa3G17A",
+    "type": "revoked_jti",
+    "created_at": "2026-09-18T13:47:02.338400+00:00"
+  },
+  {
+    "_id": "EtcRmMq8S-1FWBNdpROvZA",
+    "type": "revoked_jti",
+    "created_at": "2026-09-18T13:52:33.238214+00:00"
+  },
+  {
+    "_id": "NamMLAhYDXVd30OoltvHkg",
+    "type": "revoked_jti",
+    "created_at": "2026-09-18T14:01:33.243418+00:00"
+  },
+  {
+    "_id": "Uh_WIN924JrXyjJ2jWhYew",
+    "type": "revoked_jti",
+    "created_at": "2026-09-18T14:02:41.350360+00:00"
+  },
+  {
+    "_id": "HuvA_A0A1LWNngBs70pJYg",
+    "type": "revoked_jti",
+    "created_at": "2026-09-18T14:05:31.558167+00:00"
+  },
+  {
+    "_id": "pg2_1uy6bJ38xr3xuHaAYQ",
+    "type": "revoked_jti",
+    "created_at": "2026-09-18T14:06:31.318112+00:00"
+  },
+  {
+    "_id": "ccwKxXUJrAL10EHd-gYxqg",
+    "type": "revoked_jti",
+    "created_at": "2026-09-18T14:42:46.846595+00:00"
+  },
+  {
+    "_id": "6MmfQqkYsO0rWsUfClgGXw",
+    "type": "revoked_jti",
+    "created_at": "2026-09-18T14:43:49.947496+00:00"
+  },
+  {
+    "_id": "login_attempts:wrong-83f9589f@proctor.edu",
+    "email": "wrong-83f9589f@proctor.edu",
+    "attempts": 1,
+    "locked_until": null,
+    "created_at": "2026-09-18T14:48:31.526439+00:00"
+  },
+  {
+    "_id": "otp:login:test-7a84e92f2a@proctor.edu",
+    "email": "test-7a84e92f2a@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "0bfed5faf3bed48da523a0eee6b230b6$e9bb6a0e678e1ad51c2c409fee4f7f21121f74352cbdcda407b83c9cb1adcb8d",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-18T14:48:33.163137+00:00",
+    "expires_at": 1789743213.163137
+  },
+  {
+    "_id": "otp:login:test-f4240332b6@proctor.edu",
+    "email": "test-f4240332b6@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "bc5f2e0de325a211f24463e8f7a08aa3$347a04069f0eb6cbf96976aaba1e74052f4125aaf7c862af2fc42c9683de3ffd",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:48:35.635145+00:00",
+    "expires_at": 1789743215.635145,
+    "updated_at": "2026-09-18T14:48:35.652212+00:00"
+  },
+  {
+    "_id": "otp:login:test-14435091aa@proctor.edu",
+    "email": "test-14435091aa@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "8dc2109b9f38265388c53c1315eeb435$5d949b03000ae5f3d05b1aa2e6d5b0df10ccd7cd270661539a3f52c1ba4669f7",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:48:36.555810+00:00",
+    "expires_at": 1789743216.55581,
+    "updated_at": "2026-09-18T14:48:36.594708+00:00"
+  },
+  {
+    "_id": "otp:login:stu-00b5e1fd14@test.local",
+    "email": "stu-00b5e1fd14@test.local",
+    "purpose": "login",
+    "otp_hash": "fb6e67d36c4dbb9c16119bee2056f06f$212c1f929d2df2fc28bd7fa24f28ab9e3522efbd9961cbdaff5afb96e3040b41",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:48:38.311392+00:00",
+    "expires_at": 1789743218.311392,
+    "updated_at": "2026-09-18T14:48:38.344710+00:00"
+  },
+  {
+    "_id": "otp:login:prof-beeadc56c2@test.local",
+    "email": "prof-beeadc56c2@test.local",
+    "purpose": "login",
+    "otp_hash": "c8474dd46a8b26be32eaf60dbcbfb610$11e4ab7e67241f0a72896baa0bbd2a0dbed8d0241d398ecb0f87fc7fadc6f9cf",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:48:40.098962+00:00",
+    "expires_at": 1789743220.098962,
+    "updated_at": "2026-09-18T14:48:40.136308+00:00"
+  },
+  {
+    "_id": "otp:login:adm-e01f5bf942@proctor.edu",
+    "email": "adm-e01f5bf942@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "4309d703c2fd36009cf7afbd8012ff2c$e74137832d18eea4cc97bcb1abe5190d1a6de1821d23a49627965e8eb1fc846a",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:48:41.713813+00:00",
+    "expires_at": 1789743221.713813,
+    "updated_at": "2026-09-18T14:48:41.752498+00:00"
+  },
+  {
+    "_id": "GVmoabzhsqKa4Y8fQAHROA",
+    "type": "revoked_jti",
+    "created_at": "2026-09-18T14:48:43.440831+00:00"
+  },
+  {
+    "_id": "otp:login:otp-c75b6c1908@test.local",
+    "email": "otp-c75b6c1908@test.local",
+    "purpose": "login",
+    "otp_hash": "f29297665b0e746befaa702ae45e4a3d$fa32866eb65ee0f72cea94824737b25a3135574633e44c3a209781c0c92950b6",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:48:44.310940+00:00",
+    "expires_at": 1789743224.31094,
+    "updated_at": "2026-09-18T14:48:44.354536+00:00"
+  },
+  {
+    "_id": "otp:login:otpcool-82143e6084@test.local",
+    "email": "otpcool-82143e6084@test.local",
+    "purpose": "login",
+    "otp_hash": "cd1f7fd579b995e8ef482ff2976e0d61$7bbbef447386da7e2b49c26c641aa9a3102e8bf48bfa9e2ec2259d96d125caa1",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-18T14:48:44.720287+00:00",
+    "expires_at": 1789743224.720287
+  },
+  {
+    "_id": "otp:login:stu-4caf78a249@test.local",
+    "email": "stu-4caf78a249@test.local",
+    "purpose": "login",
+    "otp_hash": "933e209730972d37e68dc4a950130a33$b8a63987d96296f899b6c7cf6529ff0ff3892dd371c0b66d8ab806b0b9ca7fab",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-18T14:48:46.322504+00:00",
+    "expires_at": 1789743226.322504
+  },
+  {
+    "_id": "otp:login:stu-ea48a13525@test.local",
+    "email": "stu-ea48a13525@test.local",
+    "purpose": "login",
+    "otp_hash": "c5224ce896fc9e045458a1712093a66c$e772e0173d919767b72d0dd6f2f35afcb1591632e9ebe5384c800bcdceaede0e",
+    "attempts": 1,
+    "consumed": false,
+    "created_at": "2026-09-18T14:48:47.758214+00:00",
+    "expires_at": 1789743227.758214,
+    "updated_at": "2026-09-18T14:48:47.786433+00:00"
+  },
+  {
+    "_id": "otp:login:stu-1d3452c9f2@test.local",
+    "email": "stu-1d3452c9f2@test.local",
+    "purpose": "login",
+    "otp_hash": "1960fc43e1619fd8400d7470ceca45ff$7dfa37f5149971371497ae1f253e3ea4a838df34268da396e2e03a6911c7b04e",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:48:49.218784+00:00",
+    "expires_at": 1789743229.218784,
+    "updated_at": "2026-09-18T14:48:49.246501+00:00"
+  },
+  {
+    "_id": "login_attempts:wrong-c9c39240@proctor.edu",
+    "email": "wrong-c9c39240@proctor.edu",
+    "attempts": 1,
+    "locked_until": null,
+    "created_at": "2026-09-18T14:50:36.557798+00:00"
+  },
+  {
+    "_id": "otp:login:test-fe74d4f3cd@proctor.edu",
+    "email": "test-fe74d4f3cd@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "ad598a7c4ac2fd3ba711e8167018d1be$64d6b9b3213d996dcf257f54eef26d087ed6948085080b8cf45be680cbde20af",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-18T14:50:37.911277+00:00",
+    "expires_at": 1789743337.911277
+  },
+  {
+    "_id": "otp:login:test-be181fe0a6@proctor.edu",
+    "email": "test-be181fe0a6@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "ef5f8aa2e24fa989f1394c039ad7aa84$33b1090e57100c40c5e99ebc712ba7b71ebcff12a3cce5c8b7ac3e72e955b0d0",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:50:39.897798+00:00",
+    "expires_at": 1789743339.897798,
+    "updated_at": "2026-09-18T14:50:39.920157+00:00"
+  },
+  {
+    "_id": "otp:login:test-67bfa9cb58@proctor.edu",
+    "email": "test-67bfa9cb58@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "b0c4f603a034261e1a23dff45c0ad641$f84c343038f7ba3439d50133e5b8f3ebc40d85cf09a296e96a2b8b7b542cef02",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:50:40.677501+00:00",
+    "expires_at": 1789743340.677501,
+    "updated_at": "2026-09-18T14:50:40.690458+00:00"
+  },
+  {
+    "_id": "otp:login:stu-5ca7d76152@test.local",
+    "email": "stu-5ca7d76152@test.local",
+    "purpose": "login",
+    "otp_hash": "e679942a656130c69b5173b0f4a36b84$6519f93dead246a5a507aab220d9a417fba6d8472cbe8a65da530cdfbd174d1d",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:50:42.090477+00:00",
+    "expires_at": 1789743342.090477,
+    "updated_at": "2026-09-18T14:50:42.113390+00:00"
+  },
+  {
+    "_id": "otp:login:prof-49b2f12aec@test.local",
+    "email": "prof-49b2f12aec@test.local",
+    "purpose": "login",
+    "otp_hash": "b9720a287feb86962e8a1cd45e83a6c1$56bd29f3a69b75103fccc3149b22bd68405b83a54cc829d6a00a14d9914c2b06",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:50:43.446726+00:00",
+    "expires_at": 1789743343.446726,
+    "updated_at": "2026-09-18T14:50:43.468690+00:00"
+  },
+  {
+    "_id": "otp:login:adm-70e8a900d3@proctor.edu",
+    "email": "adm-70e8a900d3@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "34f7e16f5da026efa5e92764611dddec$4836d7985d990646a268274738c8d2ab0f9cb7a8e38f3303177fc2c9028ff025",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:50:44.786337+00:00",
+    "expires_at": 1789743344.786337,
+    "updated_at": "2026-09-18T14:50:44.807792+00:00"
+  },
+  {
+    "_id": "N8BBqpczgpHTIK6F3mtqdw",
+    "type": "revoked_jti",
+    "created_at": "2026-09-18T14:50:46.308786+00:00"
+  },
+  {
+    "_id": "otp:login:otp-89853fdec2@test.local",
+    "email": "otp-89853fdec2@test.local",
+    "purpose": "login",
+    "otp_hash": "4505c58d9f3e49fa9af0330851211540$f298e826fd92bc36a1b240b99061acc4774ced1f565ad6297f41e74b4b8a5ec3",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:50:46.964201+00:00",
+    "expires_at": 1789743346.964201,
+    "updated_at": "2026-09-18T14:50:46.984071+00:00"
+  },
+  {
+    "_id": "otp:login:otpcool-69e07f7ebd@test.local",
+    "email": "otpcool-69e07f7ebd@test.local",
+    "purpose": "login",
+    "otp_hash": "64988ba03719bffceebdf02bae90816e$82e8dd858c74c32e180bf3a7b6a79ce1f2407068f81b882c6f1b494da42dafe2",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-18T14:50:47.327078+00:00",
+    "expires_at": 1789743347.327078
+  },
+  {
+    "_id": "otp:login:stu-3c08bc1c13@test.local",
+    "email": "stu-3c08bc1c13@test.local",
+    "purpose": "login",
+    "otp_hash": "4c2d7222856869578e3cc4a6002090f2$9de0dada311cc449d235a03da8edca7e39cf3f038302b7570826f2adadbcd616",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-18T14:50:48.659030+00:00",
+    "expires_at": 1789743348.65903
+  },
+  {
+    "_id": "otp:login:stu-73881b1610@test.local",
+    "email": "stu-73881b1610@test.local",
+    "purpose": "login",
+    "otp_hash": "bc1736766762eb1233cb8639f3ca20a2$4be226e5fdf558d34fff2a0a8ea83177617599cb5e9497de8f6cb58dafad2f73",
+    "attempts": 1,
+    "consumed": false,
+    "created_at": "2026-09-18T14:50:49.989020+00:00",
+    "expires_at": 1789743349.98902,
+    "updated_at": "2026-09-18T14:50:50.013996+00:00"
+  },
+  {
+    "_id": "otp:login:stu-2b88509280@test.local",
+    "email": "stu-2b88509280@test.local",
+    "purpose": "login",
+    "otp_hash": "aaf14a38e36d01c86b78a3f8f12a9353$0c0a2bd35848d3cb53551d83823b01b3bcd0eaf315c8dfe9e77679569af2d347",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:50:52.251060+00:00",
+    "expires_at": 1789743352.25106,
+    "updated_at": "2026-09-18T14:50:52.272335+00:00"
+  },
+  {
+    "_id": "login_attempts:wrong-b93c668b@proctor.edu",
+    "email": "wrong-b93c668b@proctor.edu",
+    "attempts": 1,
+    "locked_until": null,
+    "created_at": "2026-09-18T14:51:54.734775+00:00"
+  },
+  {
+    "_id": "otp:login:test-4e56d4bc3d@proctor.edu",
+    "email": "test-4e56d4bc3d@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "e0ce8918db9f6968986a640873686880$6ca0fd8a370353c56592cbca3ad133dae2463bc88b21d341c40cffc452a74b09",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-18T14:51:56.356384+00:00",
+    "expires_at": 1789743416.356384
+  },
+  {
+    "_id": "otp:login:test-a392a00426@proctor.edu",
+    "email": "test-a392a00426@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "b7ec8487e92885a129ab4928215639fe$da250ded7563ea19d56c9f21354ba3c2369ae24e9007306b4fcf84c08aa7305f",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:51:58.357549+00:00",
+    "expires_at": 1789743418.357549,
+    "updated_at": "2026-09-18T14:51:58.373302+00:00"
+  },
+  {
+    "_id": "otp:login:test-311ae4e7be@proctor.edu",
+    "email": "test-311ae4e7be@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "e63dc8fb1df560b51ea312edf28d4103$bcda9c60ee29c1ad93e543117e406bc22e6f59369ee91ade5e4c83db5df0e6b7",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:51:59.059532+00:00",
+    "expires_at": 1789743419.059532,
+    "updated_at": "2026-09-18T14:51:59.084868+00:00"
+  },
+  {
+    "_id": "otp:login:stu-6531c231c7@test.local",
+    "email": "stu-6531c231c7@test.local",
+    "purpose": "login",
+    "otp_hash": "77091726e1c2c5adf55f92af00bd5e85$276544dc7a24c067d9e106b59a135c5f03dd22ac0561ca1c102199bf5e81d8ea",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:52:02.752131+00:00",
+    "expires_at": 1789743422.752131,
+    "updated_at": "2026-09-18T14:52:02.781765+00:00"
+  },
+  {
+    "_id": "otp:login:prof-9dafe3a5e9@test.local",
+    "email": "prof-9dafe3a5e9@test.local",
+    "purpose": "login",
+    "otp_hash": "30dc5e94b35bb9cdbd9f58343f97f144$2dd8bd4f2e5970e06729173893a440e888ed04d16eee06aaa9ef6c1476d10a6d",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:52:04.188659+00:00",
+    "expires_at": 1789743424.188659,
+    "updated_at": "2026-09-18T14:52:04.222772+00:00"
+  },
+  {
+    "_id": "otp:login:adm-8799bec975@proctor.edu",
+    "email": "adm-8799bec975@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "30c1c1a99044c2ee1e0a37114160192a$1b15218b7fa1e42713e557fc0542778df8e567435d237530d647c7684f8f10d5",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:52:05.520135+00:00",
+    "expires_at": 1789743425.520135,
+    "updated_at": "2026-09-18T14:52:05.547247+00:00"
+  },
+  {
+    "_id": "TWfB6NHNpnXFUtKxlr4tMw",
+    "type": "revoked_jti",
+    "created_at": "2026-09-18T14:52:06.894888+00:00"
+  },
+  {
+    "_id": "otp:login:otp-2143268d21@test.local",
+    "email": "otp-2143268d21@test.local",
+    "purpose": "login",
+    "otp_hash": "6015a419ac92c5e356d5a807cf7d0562$c189ef4b1c7ff2d191440c1de836f250014c0550f4ce13c29f29a7466e5a8117",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:52:07.622648+00:00",
+    "expires_at": 1789743427.622648,
+    "updated_at": "2026-09-18T14:52:07.653832+00:00"
+  },
+  {
+    "_id": "otp:login:otpcool-511f64e8d4@test.local",
+    "email": "otpcool-511f64e8d4@test.local",
+    "purpose": "login",
+    "otp_hash": "f95fe2247753f489d30c8684dabed40c$772c0e07c30ae7d60c0c694f7b593eda032cdf31618a912bec11c85647c711cf",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-18T14:52:07.934689+00:00",
+    "expires_at": 1789743427.934689
+  },
+  {
+    "_id": "otp:login:stu-f73a72470d@test.local",
+    "email": "stu-f73a72470d@test.local",
+    "purpose": "login",
+    "otp_hash": "7e1993e48c2f0e05e5b6ef10e28e9456$b6a77b28ec78e2231ff0fbaf73c1b41b6bf69bdf9188469956ab8eeefa62d638",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-18T14:52:09.280374+00:00",
+    "expires_at": 1789743429.280374
+  },
+  {
+    "_id": "otp:login:stu-6b2b4889f1@test.local",
+    "email": "stu-6b2b4889f1@test.local",
+    "purpose": "login",
+    "otp_hash": "ab2cc0137fa5bea35ed99d53e9be51d8$d5cd1d8dd4d2a67e89bafe6f176d8ed84b77fbf049e53b33864e0c364bc649b3",
+    "attempts": 1,
+    "consumed": false,
+    "created_at": "2026-09-18T14:52:10.552195+00:00",
+    "expires_at": 1789743430.552195,
+    "updated_at": "2026-09-18T14:52:10.566554+00:00"
+  },
+  {
+    "_id": "otp:login:stu-8ebc95bb27@test.local",
+    "email": "stu-8ebc95bb27@test.local",
+    "purpose": "login",
+    "otp_hash": "d4b9999ffa247124032e5a3a160ca76c$e101b829e286f046e183ed60ca63d5004322f567912cdf76e9572895ff146d91",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:52:12.600679+00:00",
+    "expires_at": 1789743432.600679,
+    "updated_at": "2026-09-18T14:52:12.628710+00:00"
+  },
+  {
+    "_id": "login_attempts:wrong-6cc25b3a@proctor.edu",
+    "email": "wrong-6cc25b3a@proctor.edu",
+    "attempts": 1,
+    "locked_until": null,
+    "created_at": "2026-09-18T14:58:19.662612+00:00"
+  },
+  {
+    "_id": "otp:login:test-32138b5305@proctor.edu",
+    "email": "test-32138b5305@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "29cb4de7fc8151802a00bdb4c9024b8c$4fd21f26746bd4f281522312a92ff04137e585ba289c061254ab4737356c6f01",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-18T14:58:22.160693+00:00",
+    "expires_at": 1789743802.160693
+  },
+  {
+    "_id": "otp:login:test-fac38824d3@proctor.edu",
+    "email": "test-fac38824d3@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "6d9d6b933657f1cc81f424d2079b9488$0360391b0b5bacbef5d4399f5ccac6bffea4269e897c32ed86d54b26904216d4",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:58:25.935050+00:00",
+    "expires_at": 1789743805.93505,
+    "updated_at": "2026-09-18T14:58:26.015811+00:00"
+  },
+  {
+    "_id": "otp:login:test-0525ac6696@proctor.edu",
+    "email": "test-0525ac6696@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "da47238cb56c474b6ae7d7f230efa904$6c51d7d88a1df60c0a6d5f65028ab82d4aa6453e07cd0b568841228f8b096551",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:58:27.383559+00:00",
+    "expires_at": 1789743807.383559,
+    "updated_at": "2026-09-18T14:58:27.421308+00:00"
+  },
+  {
+    "_id": "otp:login:stu-0cf44b3a50@test.local",
+    "email": "stu-0cf44b3a50@test.local",
+    "purpose": "login",
+    "otp_hash": "b380c78d1ce49dd575089bd5139aa4ce$12c8686861c49884e7cc8219a4e3b49e249a3777b4ec73f9564c9387d2aa0805",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:58:34.692000+00:00",
+    "expires_at": 1789743814.692,
+    "updated_at": "2026-09-18T14:58:34.732338+00:00"
+  },
+  {
+    "_id": "otp:login:prof-42fe7d5f26@test.local",
+    "email": "prof-42fe7d5f26@test.local",
+    "purpose": "login",
+    "otp_hash": "51215f39695676ffab61e34bb6e46997$f33c2af43f395f2a99cfbdeabfd9b8edb8fc54ef1cbb3b24a8cc0aee6703225e",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:58:37.132739+00:00",
+    "expires_at": 1789743817.132739,
+    "updated_at": "2026-09-18T14:58:37.170002+00:00"
+  },
+  {
+    "_id": "otp:login:adm-6bb13dc67e@proctor.edu",
+    "email": "adm-6bb13dc67e@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "0a3e5ecc7e9514b506a1abe03b2d04d4$a07381393b6e3e9b3c1acb62c3857b49ed3de80e32cb1c4e91c50f5d7cb6a7e0",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:58:40.010817+00:00",
+    "expires_at": 1789743820.010817,
+    "updated_at": "2026-09-18T14:58:40.058880+00:00"
+  },
+  {
+    "_id": "cFJoQD1uLmH8Cd2eJCtlFw",
+    "type": "revoked_jti",
+    "created_at": "2026-09-18T14:58:42.988847+00:00"
+  },
+  {
+    "_id": "otp:login:otp-3a21dda7a9@test.local",
+    "email": "otp-3a21dda7a9@test.local",
+    "purpose": "login",
+    "otp_hash": "629e410c10afa8e42a698f7083386ab0$13b852648048ed0e4c046ea33eef5c20630c3238514594cd60aac38fc39e8587",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:58:44.418889+00:00",
+    "expires_at": 1789743824.418889,
+    "updated_at": "2026-09-18T14:58:44.509420+00:00"
+  },
+  {
+    "_id": "otp:login:otpcool-f866944ac8@test.local",
+    "email": "otpcool-f866944ac8@test.local",
+    "purpose": "login",
+    "otp_hash": "d45c0755242f3e59014592d44b6608f5$996994d23702c57f5fe4cada5bb4253a504d65e5d6fe6cc01e780f76bf10ba18",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-18T14:58:45.000570+00:00",
+    "expires_at": 1789743825.00057
+  },
+  {
+    "_id": "otp:login:stu-2ae825bb80@test.local",
+    "email": "stu-2ae825bb80@test.local",
+    "purpose": "login",
+    "otp_hash": "a3020e61b5e2952984a2c9230bdaffcc$831016b646fbeedb7b63e58116d099ecbac28f2e4672e98d8c23278918ad2494",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-18T14:58:47.785319+00:00",
+    "expires_at": 1789743827.785319
+  },
+  {
+    "_id": "otp:login:stu-fe2b0a1670@test.local",
+    "email": "stu-fe2b0a1670@test.local",
+    "purpose": "login",
+    "otp_hash": "435d11b3ac09de885527a9ad9b3d903b$65781ff7b10ec2862bc1b9696f601d869a12ca5a9d45a4a229865fd431ec4cea",
+    "attempts": 1,
+    "consumed": false,
+    "created_at": "2026-09-18T14:58:50.442610+00:00",
+    "expires_at": 1789743830.44261,
+    "updated_at": "2026-09-18T14:58:50.512247+00:00"
+  },
+  {
+    "_id": "otp:login:stu-5fe6fd6d07@test.local",
+    "email": "stu-5fe6fd6d07@test.local",
+    "purpose": "login",
+    "otp_hash": "b88c0184ddb0dc8eee84384c2b5829d7$7033f64019c5b3402b8e9c82439e60009b234adf197a1fcdfa60505769b75ea0",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T14:58:54.471644+00:00",
+    "expires_at": 1789743834.471644,
+    "updated_at": "2026-09-18T14:58:54.526674+00:00"
+  },
+  {
+    "_id": "login_attempts:wrong-02073fd4@proctor.edu",
+    "email": "wrong-02073fd4@proctor.edu",
+    "attempts": 1,
+    "locked_until": null,
+    "created_at": "2026-09-18T15:01:52.263705+00:00"
+  },
+  {
+    "_id": "otp:login:test-3bbbab1aa3@proctor.edu",
+    "email": "test-3bbbab1aa3@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "1e351e9bb33b9b0286637bff72a21070$071171938191a521827786d0e5d60bf1e455a775b77a010f2785a5a36a8efac2",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-18T15:01:53.290917+00:00",
+    "expires_at": 1789744013.290917
+  },
+  {
+    "_id": "otp:login:test-2c417fc332@proctor.edu",
+    "email": "test-2c417fc332@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "162a3cf064bbbf4ca54a6048423cd488$b02ac8b9153c88c90d52305bc78726a46a373588b08d4a1ee77ca8a4054a09ce",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T15:01:54.485866+00:00",
+    "expires_at": 1789744014.485866,
+    "updated_at": "2026-09-18T15:01:54.516805+00:00"
+  },
+  {
+    "_id": "otp:login:test-a67df6046f@proctor.edu",
+    "email": "test-a67df6046f@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "5a4a164bb8406013b136227a1bfb90e1$080f540d574894fa933178c978a9d19d4259433d212441cce1688597ecf2704a",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T15:01:54.996612+00:00",
+    "expires_at": 1789744014.996612,
+    "updated_at": "2026-09-18T15:01:55.055463+00:00"
+  },
+  {
+    "_id": "otp:login:stu-8fadf23d9a@test.local",
+    "email": "stu-8fadf23d9a@test.local",
+    "purpose": "login",
+    "otp_hash": "b6f5ababf2d4246eb50f5350426599f2$95b03b47551941f17a6ffef8ee1f92e220eaba09d16aea6aa851dd8e273d3247",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T15:01:58.924367+00:00",
+    "expires_at": 1789744018.924367,
+    "updated_at": "2026-09-18T15:01:58.941743+00:00"
+  },
+  {
+    "_id": "otp:login:prof-9addff70b9@test.local",
+    "email": "prof-9addff70b9@test.local",
+    "purpose": "login",
+    "otp_hash": "0f29fccada6e55e9c8b4a469e0b2ad19$bbf3e01be972bb2b098eb568aac3c99b7cfb796e119bb5bcd0a7b74c3ac67d44",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T15:01:59.812774+00:00",
+    "expires_at": 1789744019.812774,
+    "updated_at": "2026-09-18T15:01:59.840838+00:00"
+  },
+  {
+    "_id": "otp:login:adm-002ef9743a@proctor.edu",
+    "email": "adm-002ef9743a@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "2ee22d324f163378f1fbc5e44d2e9077$c539254f4e3c6ac72cc3d851d451edc442baf9f0c6b14686984cba808346982a",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T15:02:00.716244+00:00",
+    "expires_at": 1789744020.716244,
+    "updated_at": "2026-09-18T15:02:00.732205+00:00"
+  },
+  {
+    "_id": "sZRG1ycoF1v65MSe4knxQQ",
+    "type": "revoked_jti",
+    "created_at": "2026-09-18T15:02:01.833313+00:00"
+  },
+  {
+    "_id": "otp:login:otp-5f60152630@test.local",
+    "email": "otp-5f60152630@test.local",
+    "purpose": "login",
+    "otp_hash": "82bf6dc4f2e486e8a399b59265bc92f4$9ac9823a27ecfe63a62524818324b0cc2b0c56c05085559757d0603dd720dd38",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T15:02:02.570164+00:00",
+    "expires_at": 1789744022.570164,
+    "updated_at": "2026-09-18T15:02:02.603283+00:00"
+  },
+  {
+    "_id": "otp:login:otpcool-8b4a50f3a9@test.local",
+    "email": "otpcool-8b4a50f3a9@test.local",
+    "purpose": "login",
+    "otp_hash": "99925a5dc7c8ac1bcdb9643c5fe9d3dc$193308721037c9388509d3847cd65e317813ff9600f87daa404e94c82ea4af39",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-18T15:02:02.970791+00:00",
+    "expires_at": 1789744022.970791
+  },
+  {
+    "_id": "otp:login:stu-a61ea5de62@test.local",
+    "email": "stu-a61ea5de62@test.local",
+    "purpose": "login",
+    "otp_hash": "c070cbfbfb2ff5970177d50108373c86$782c792c0d1d142bb8cae3a314a8725bfc2abda0d512704203b14786333ef3b5",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-18T15:02:03.896304+00:00",
+    "expires_at": 1789744023.896304
+  },
+  {
+    "_id": "otp:login:stu-28239efca6@test.local",
+    "email": "stu-28239efca6@test.local",
+    "purpose": "login",
+    "otp_hash": "6ad16856d0e3a23d0962719a4fa25b1d$4ebcbd8b2b1362c1f09a35329706c4bb8a0596f3bfac4b3e5b6a94cf4ea0d0e8",
+    "attempts": 1,
+    "consumed": false,
+    "created_at": "2026-09-18T15:02:04.794881+00:00",
+    "expires_at": 1789744024.794881,
+    "updated_at": "2026-09-18T15:02:04.809522+00:00"
+  },
+  {
+    "_id": "otp:login:stu-ebaa572944@test.local",
+    "email": "stu-ebaa572944@test.local",
+    "purpose": "login",
+    "otp_hash": "fc43162fbe9e187c67bf6a37fc2148ff$ee3f2e0245e98d719add22fe9b47f52229a03d385781b03c3cefa579e5cf699b",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-18T15:02:06.100506+00:00",
+    "expires_at": 1789744026.100506,
+    "updated_at": "2026-09-18T15:02:06.153722+00:00"
+  },
+  {
+    "_id": "zIPUDqAJw8BG7sS6IvIuAQ",
+    "type": "revoked_jti",
+    "created_at": "2026-09-18T15:29:48.696956+00:00"
+  },
+  {
+    "_id": "login_attempts:wrong-b3f2f3bc@proctor.edu",
+    "email": "wrong-b3f2f3bc@proctor.edu",
+    "attempts": 1,
+    "locked_until": null,
+    "created_at": "2026-09-19T09:25:26.789264+00:00"
+  },
+  {
+    "_id": "otp:login:test-e1d306a7e4@proctor.edu",
+    "email": "test-e1d306a7e4@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "04a3cac9c807dd731b21b1f0789ba656$ea82fd4bbce93e9060c96175917ab52ac8454553b6526ebd3a0b0c6735d3bac0",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-19T09:25:27.322282+00:00",
+    "expires_at": 1789810227.322282
+  },
+  {
+    "_id": "otp:login:test-49005b5761@proctor.edu",
+    "email": "test-49005b5761@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "01ea72f023a43add37537974d5a057fb$55f5418b8de1807840f12e13b37dd1ea8349677437f6c7175e8bc5716ffeb645",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T09:25:28.218480+00:00",
+    "expires_at": 1789810228.21848,
+    "updated_at": "2026-09-19T09:25:28.230084+00:00"
+  },
+  {
+    "_id": "otp:login:test-347eedf3f9@proctor.edu",
+    "email": "test-347eedf3f9@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "1b997b913c0bca42d9929c00a66ba340$31b29624b810399aca897f6b4fd7f7194d7ecb5d41084738e15d1066852a61d1",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T09:25:28.626041+00:00",
+    "expires_at": 1789810228.626041,
+    "updated_at": "2026-09-19T09:25:28.642686+00:00"
+  },
+  {
+    "_id": "otp:login:stu-530de6df8a@test.local",
+    "email": "stu-530de6df8a@test.local",
+    "purpose": "login",
+    "otp_hash": "ea35e39590a7aaabe583d3490be3f331$fa517a82a2b88eb4490e046d304c020280643da6c064b7e62026607de262a65d",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T09:25:31.410877+00:00",
+    "expires_at": 1789810231.410877,
+    "updated_at": "2026-09-19T09:25:31.434540+00:00"
+  },
+  {
+    "_id": "otp:login:prof-cfd725bc12@test.local",
+    "email": "prof-cfd725bc12@test.local",
+    "purpose": "login",
+    "otp_hash": "d1eab4585002b0f31983c66d43cbbb10$e9989d491e684f99e37ca0e2f7e39aec87d97e89567aacc14d96890c74bc1033",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T09:25:32.072486+00:00",
+    "expires_at": 1789810232.072486,
+    "updated_at": "2026-09-19T09:25:32.085284+00:00"
+  },
+  {
+    "_id": "otp:login:adm-874eea7039@proctor.edu",
+    "email": "adm-874eea7039@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "aabfde90adfd08aa8fbbee210d756ecb$190fa71839ce8b084c682549c0f98bf38ee21945e0c3106410f0a04530b59595",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T09:25:32.660393+00:00",
+    "expires_at": 1789810232.660393,
+    "updated_at": "2026-09-19T09:25:32.670167+00:00"
+  },
+  {
+    "_id": "mTImWqfRT_HJ9tsKYnY2EA",
+    "type": "revoked_jti",
+    "created_at": "2026-09-19T09:25:33.360237+00:00"
+  },
+  {
+    "_id": "otp:login:otp-deb0ced287@test.local",
+    "email": "otp-deb0ced287@test.local",
+    "purpose": "login",
+    "otp_hash": "8f65dc4050ae65992cc1e7f83872ef2d$23a8363deb759b6801eccb9c1772a20508e566b156f6c7d148395cc84cd99e9b",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T09:25:33.688145+00:00",
+    "expires_at": 1789810233.688145,
+    "updated_at": "2026-09-19T09:25:33.696427+00:00"
+  },
+  {
+    "_id": "otp:login:otpcool-cc38dc50d5@test.local",
+    "email": "otpcool-cc38dc50d5@test.local",
+    "purpose": "login",
+    "otp_hash": "96e2a45926b05bc4745fa0553d3b6e25$150e154a808dfd6382366c8fef6f1e50a9620b1854b15a998233fd129e1dd4a2",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-19T09:25:33.815181+00:00",
+    "expires_at": 1789810233.815181
+  },
+  {
+    "_id": "otp:login:stu-c93ba22242@test.local",
+    "email": "stu-c93ba22242@test.local",
+    "purpose": "login",
+    "otp_hash": "02949f1f25348cac7ab0161c63750a32$40fe4366437fce3f5a175f8fb3a5711b6df8f2487f6e676a31812065e629e9ee",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-19T09:25:34.442710+00:00",
+    "expires_at": 1789810234.44271
+  },
+  {
+    "_id": "otp:login:stu-954a6a8750@test.local",
+    "email": "stu-954a6a8750@test.local",
+    "purpose": "login",
+    "otp_hash": "e437cae7cd40b6458cec11801676b9fc$66e891a64b4ff6cd920ab8aaf0f28c4a6ebf8b277a701ad5bc12e91eeb317cad",
+    "attempts": 1,
+    "consumed": false,
+    "created_at": "2026-09-19T09:25:35.014410+00:00",
+    "expires_at": 1789810235.01441,
+    "updated_at": "2026-09-19T09:25:35.026134+00:00"
+  },
+  {
+    "_id": "otp:login:stu-82a6b116fe@test.local",
+    "email": "stu-82a6b116fe@test.local",
+    "purpose": "login",
+    "otp_hash": "d0116bb43b1cb907cd6986c1ca2ee192$05da5ad54fcf8e5a46b72f661f9685103b510b8373385c0babb378613d32eb72",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T09:25:35.996552+00:00",
+    "expires_at": 1789810235.996552,
+    "updated_at": "2026-09-19T09:25:36.020757+00:00"
+  },
+  {
+    "_id": "login_attempts:wrong-39efd395@proctor.edu",
+    "email": "wrong-39efd395@proctor.edu",
+    "attempts": 1,
+    "locked_until": null,
+    "created_at": "2026-09-19T09:30:22.252539+00:00"
+  },
+  {
+    "_id": "otp:login:test-79d0db717e@proctor.edu",
+    "email": "test-79d0db717e@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "32778433a66067e2d2b8e05c17440884$76c3fca1f2967f6717753bba59dbdeda3d17d435fdc7fbeae5299c39a883fb0c",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-19T09:30:22.828155+00:00",
+    "expires_at": 1789810522.828155
+  },
+  {
+    "_id": "otp:login:test-324d220117@proctor.edu",
+    "email": "test-324d220117@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "d08637dc6079cd6165902f1932416467$85cc8ab49a4783465460917b4d50a2f7b3672adfddf1a23acbf3a9baada3295d",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T09:30:23.731351+00:00",
+    "expires_at": 1789810523.731351,
+    "updated_at": "2026-09-19T09:30:23.741037+00:00"
+  },
+  {
+    "_id": "otp:login:test-978a011428@proctor.edu",
+    "email": "test-978a011428@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "8761e72a8ac9464a8e8fb453d74430da$2405bfe7e9364abeaff7d6154c086fde9c7e60b290477ec185efd06e0dac19b8",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T09:30:24.052602+00:00",
+    "expires_at": 1789810524.052602,
+    "updated_at": "2026-09-19T09:30:24.066288+00:00"
+  },
+  {
+    "_id": "otp:login:stu-20331c429b@test.local",
+    "email": "stu-20331c429b@test.local",
+    "purpose": "login",
+    "otp_hash": "ae241b06500d8cc32ed6c21a89828a1e$53776607dbcbee1c944c8d87b940f40c256d71265876f955c01f73993d264275",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T09:30:26.604265+00:00",
+    "expires_at": 1789810526.604265,
+    "updated_at": "2026-09-19T09:30:26.613484+00:00"
+  },
+  {
+    "_id": "otp:login:prof-a745940b06@test.local",
+    "email": "prof-a745940b06@test.local",
+    "purpose": "login",
+    "otp_hash": "be2387670e23abc26c606e6acd3cf3d7$d11de13766e6c0baf2fd378f0481c503a87a6db0305ec5eff0417851bd0a9598",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T09:30:27.241040+00:00",
+    "expires_at": 1789810527.24104,
+    "updated_at": "2026-09-19T09:30:27.254970+00:00"
+  },
+  {
+    "_id": "otp:login:adm-4d6287520c@proctor.edu",
+    "email": "adm-4d6287520c@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "d8783187fcd2199663c0ac4dc6a1a7db$477ee3f9172a82dcaf4f81869e0ec164cb93d473a39cdfce778adf65ab22ded6",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T09:30:27.796401+00:00",
+    "expires_at": 1789810527.796401,
+    "updated_at": "2026-09-19T09:30:27.805751+00:00"
+  },
+  {
+    "_id": "wT0vHLwHSGC1JskY2HGAiw",
+    "type": "revoked_jti",
+    "created_at": "2026-09-19T09:30:28.475347+00:00"
+  },
+  {
+    "_id": "otp:login:otp-f84c2d7ab8@test.local",
+    "email": "otp-f84c2d7ab8@test.local",
+    "purpose": "login",
+    "otp_hash": "a4b3096ff5bdee26dba67dd2ff5a5f09$7de587f4373dc38c150f3b1c245dda5e2fb9705151a3ccd7df5fe7cdb2f1a4e3",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T09:30:28.776630+00:00",
+    "expires_at": 1789810528.77663,
+    "updated_at": "2026-09-19T09:30:28.789706+00:00"
+  },
+  {
+    "_id": "otp:login:otpcool-e606625470@test.local",
+    "email": "otpcool-e606625470@test.local",
+    "purpose": "login",
+    "otp_hash": "33c27859de30f7901ae900ca270c9f06$f1e69ab1b48d1062d49c8b41601508865c20814cc4a0f574f77acf1bdb7b4448",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-19T09:30:28.883956+00:00",
+    "expires_at": 1789810528.883956
+  },
+  {
+    "_id": "otp:login:stu-70eebe4288@test.local",
+    "email": "stu-70eebe4288@test.local",
+    "purpose": "login",
+    "otp_hash": "b806728294b84e3de7b4d40aa8669638$d559d285beee72546929472b378178c8a0c1f75068e2df8079846a399cb79044",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-19T09:30:29.527409+00:00",
+    "expires_at": 1789810529.527409
+  },
+  {
+    "_id": "otp:login:stu-0f94504b96@test.local",
+    "email": "stu-0f94504b96@test.local",
+    "purpose": "login",
+    "otp_hash": "3dccbf89acd6a9109a7f2a7f62469235$27fed0b860f38f3c0a616372e0f5e909cc3f95c87c2f84f942c4331a4bc311f6",
+    "attempts": 1,
+    "consumed": false,
+    "created_at": "2026-09-19T09:30:30.076608+00:00",
+    "expires_at": 1789810530.076608,
+    "updated_at": "2026-09-19T09:30:30.091830+00:00"
+  },
+  {
+    "_id": "otp:login:stu-78a3ed87fb@test.local",
+    "email": "stu-78a3ed87fb@test.local",
+    "purpose": "login",
+    "otp_hash": "96ef3318eb83fef13aa7bbc79a6838dc$5fa4e2001ea1b79f9f1101792ce48b39d6e4e9fc9852f29b3b3c4258b573f6b8",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T09:30:31.003250+00:00",
+    "expires_at": 1789810531.00325,
+    "updated_at": "2026-09-19T09:30:31.015644+00:00"
+  },
+  {
+    "_id": "login_attempts:wrong-11ee8f3a@proctor.edu",
+    "email": "wrong-11ee8f3a@proctor.edu",
+    "attempts": 1,
+    "locked_until": null,
+    "created_at": "2026-09-19T09:52:42.171925+00:00"
+  },
+  {
+    "_id": "otp:login:test-d3fea85912@proctor.edu",
+    "email": "test-d3fea85912@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "69721fc0004f526553b4637edc3b8702$aef3d0106ccac81c61e8a5255e6b5a1c8b02bf75080c356d1401d1879a84997c",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-19T09:52:43.397845+00:00",
+    "expires_at": 1789811863.397845
+  },
+  {
+    "_id": "otp:login:test-b4e50f59d9@proctor.edu",
+    "email": "test-b4e50f59d9@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "761c5db2cecdea1c0ff0b2ef8f0b3ec6$02ba0658fd41ae25b48c7c90743df1af4bd3e17d8d58c1d15940acc548381043",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T09:52:48.153469+00:00",
+    "expires_at": 1789811868.153469,
+    "updated_at": "2026-09-19T09:52:48.170897+00:00"
+  },
+  {
+    "_id": "otp:login:test-d946428b7e@proctor.edu",
+    "email": "test-d946428b7e@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "8d3928d793d0f0537d6619bab30663a5$baa00562ec1de2672fa12a4f1b6003ac3c0c212f67d46830ca597a2309e4c5f3",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T09:52:48.539939+00:00",
+    "expires_at": 1789811868.539939,
+    "updated_at": "2026-09-19T09:52:48.556058+00:00"
+  },
+  {
+    "_id": "otp:login:stu-5ea9da9c60@test.local",
+    "email": "stu-5ea9da9c60@test.local",
+    "purpose": "login",
+    "otp_hash": "e8fbee5fafeabfcde4c89028ca3c7a36$9f67ddea101b263ce067dc8c16a48d43876affdc5e2b711c49a8cb6f8e4eef7e",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T09:52:51.697046+00:00",
+    "expires_at": 1789811871.697046,
+    "updated_at": "2026-09-19T09:52:51.707935+00:00"
+  },
+  {
+    "_id": "otp:login:prof-de36a19da2@test.local",
+    "email": "prof-de36a19da2@test.local",
+    "purpose": "login",
+    "otp_hash": "026fb79724503022fab3f54e35ce9b47$5044c807adbeaa0637db0f252e67d1879dd81ec2d0f62a2380d7f4797c67c323",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T09:52:52.401284+00:00",
+    "expires_at": 1789811872.401284,
+    "updated_at": "2026-09-19T09:52:52.411185+00:00"
+  },
+  {
+    "_id": "otp:login:adm-b038cbe8c9@proctor.edu",
+    "email": "adm-b038cbe8c9@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "9135ea126bff456f5e7a9221bd89fc8c$4f1b1e7929830bf3d3c24b57ad8407de874e48202526243775ed069b3cb66c6e",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T09:52:53.101927+00:00",
+    "expires_at": 1789811873.101927,
+    "updated_at": "2026-09-19T09:52:53.117333+00:00"
+  },
+  {
+    "_id": "zUSMrX0WIwtPTku4Myu7yw",
+    "type": "revoked_jti",
+    "created_at": "2026-09-19T09:52:53.882340+00:00"
+  },
+  {
+    "_id": "otp:login:otp-1d91bce585@test.local",
+    "email": "otp-1d91bce585@test.local",
+    "purpose": "login",
+    "otp_hash": "97f803094da33ce9bcb55905beb7f1f5$4dfc0630cea1a3e62413ea92b1ed95a707d23392b5b88285c6c0c174ea6b8db8",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T09:52:54.259077+00:00",
+    "expires_at": 1789811874.259077,
+    "updated_at": "2026-09-19T09:52:54.267346+00:00"
+  },
+  {
+    "_id": "otp:login:otpcool-6524822f32@test.local",
+    "email": "otpcool-6524822f32@test.local",
+    "purpose": "login",
+    "otp_hash": "b5e20bb95c655c2f42e0cd001b9fe9de$37e9ccd1459a87a925fc4661801b0e4cb7d7c6bd92121991b6fa4d82fd1b6084",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-19T09:52:57.558183+00:00",
+    "expires_at": 1789811877.558183
+  },
+  {
+    "_id": "otp:login:stu-d3e8b55806@test.local",
+    "email": "stu-d3e8b55806@test.local",
+    "purpose": "login",
+    "otp_hash": "0f9bfe003194a34191fb5c125ef538ca$8fa09383b69f04359e83e4f7f378d155e7ff406d4ffc376c887b550c707cba16",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-19T09:53:01.887463+00:00",
+    "expires_at": 1789811881.887463
+  },
+  {
+    "_id": "otp:login:stu-c170f1b8d2@test.local",
+    "email": "stu-c170f1b8d2@test.local",
+    "purpose": "login",
+    "otp_hash": "b482136cafbd5ed95d290c81524b8ee2$73ab102b3c9bb857e96022284934fb9dcec3d5d0e82f968c0813b1d27a70191c",
+    "attempts": 1,
+    "consumed": false,
+    "created_at": "2026-09-19T09:53:05.651467+00:00",
+    "expires_at": 1789811885.651467,
+    "updated_at": "2026-09-19T09:53:08.920019+00:00"
+  },
+  {
+    "_id": "otp:login:stu-bd5d3b614b@test.local",
+    "email": "stu-bd5d3b614b@test.local",
+    "purpose": "login",
+    "otp_hash": "d56b1cf5b5218e616de0a19f5ec84363$67c637372345d35433e35c00b290fd24aad1aa6ae925d4835d169c2d84963bc2",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T09:53:09.990593+00:00",
+    "expires_at": 1789811889.990593,
+    "updated_at": "2026-09-19T09:53:10.002887+00:00"
+  },
+  {
+    "_id": "otp:login:colacosavio2@gmail.com",
+    "email": "colacosavio2@gmail.com",
+    "purpose": "login",
+    "otp_hash": "8b57ba82911169e3bdce0f413db2ad75$23e9ec0d30bf02063ed82b8fe286eb310192611084818189ffe339f2be6dfbff",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T10:03:58.948233+00:00",
+    "expires_at": 1789812538.948233,
+    "updated_at": "2026-09-19T10:04:21.687085+00:00"
+  },
+  {
+    "_id": "login_attempts:wrong-7890fd52@proctor.edu",
+    "email": "wrong-7890fd52@proctor.edu",
+    "attempts": 1,
+    "locked_until": null,
+    "created_at": "2026-09-19T10:50:22.372788+00:00"
+  },
+  {
+    "_id": "otp:login:test-5f9b7f323e@proctor.edu",
+    "email": "test-5f9b7f323e@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "c9d3269849680f47d40791a3048a2aed$f3d700e3e62828d49b8d024635fe69e5a9637ca55069db8dcafeb364c8ccb278",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T10:50:26.557843+00:00",
+    "expires_at": 1789815326.557843,
+    "updated_at": "2026-09-19T10:50:26.576658+00:00"
+  },
+  {
+    "_id": "otp:login:test-926fcd6068@proctor.edu",
+    "email": "test-926fcd6068@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "9535195a8a74275246add5cbb9efc129$671793661f2c468489f5dd5d3e47d5c94ae55076ee927cf9c0327f9b55cbf47c",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T10:50:26.977776+00:00",
+    "expires_at": 1789815326.977776,
+    "updated_at": "2026-09-19T10:50:26.989642+00:00"
+  },
+  {
+    "_id": "otp:login:stu-4b9a580bcc@test.local",
+    "email": "stu-4b9a580bcc@test.local",
+    "purpose": "login",
+    "otp_hash": "2418f1c2753cd9c59b3dd7f6458e605b$7b56b866d159e8aa8779d5bee819305b91fbc6bc959e180f4fcef18df657a319",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T10:50:30.357176+00:00",
+    "expires_at": 1789815330.357176,
+    "updated_at": "2026-09-19T10:50:30.374763+00:00"
+  },
+  {
+    "_id": "otp:login:prof-3d68e7530c@test.local",
+    "email": "prof-3d68e7530c@test.local",
+    "purpose": "login",
+    "otp_hash": "a924b7afc29d06881dab32681c570fd1$5682415a6ddb9fa0b5865604397ae72a7c902b966c033f900b40a2057e50e48f",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T10:50:31.169932+00:00",
+    "expires_at": 1789815331.169932,
+    "updated_at": "2026-09-19T10:50:31.182560+00:00"
+  },
+  {
+    "_id": "otp:login:adm-723c5b29eb@proctor.edu",
+    "email": "adm-723c5b29eb@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "957e99a6c3ce8403d75f04a0af3eefec$59c1ec89cac7c02ba3b7dcfffe62ec6e8754d2bfcc53a66c876734f0170396a3",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T10:50:31.891344+00:00",
+    "expires_at": 1789815331.891344,
+    "updated_at": "2026-09-19T10:50:31.905296+00:00"
+  },
+  {
+    "_id": "xDUbMnxaxdyEqnrEOEKCig",
+    "type": "revoked_jti",
+    "created_at": "2026-09-19T10:50:32.675246+00:00"
+  },
+  {
+    "_id": "otp:login:otp-2f88429e97@test.local",
+    "email": "otp-2f88429e97@test.local",
+    "purpose": "login",
+    "otp_hash": "275ac9561c13c72ce263e0557cf0c447$7c6e3204bb5df6ce0261518ff7b2d39ae44e80e04058454b435a2ed7c51b8b70",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T10:50:33.111009+00:00",
+    "expires_at": 1789815333.111009,
+    "updated_at": "2026-09-19T10:50:33.119982+00:00"
+  },
+  {
+    "_id": "otp:login:stu-726a1c1bee@test.local",
+    "email": "stu-726a1c1bee@test.local",
+    "purpose": "login",
+    "otp_hash": "0e154029dcba39d15d5ce5395b1e7610$c0b576978257f09a9ecc302bf5dcff82ede3d7312c3128487d647d01cf2aba61",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T10:50:44.166560+00:00",
+    "expires_at": 1789815344.16656,
+    "updated_at": "2026-09-19T10:50:44.181713+00:00"
+  },
+  {
+    "_id": "login_attempts:wrong-d260ba63@proctor.edu",
+    "email": "wrong-d260ba63@proctor.edu",
+    "attempts": 1,
+    "locked_until": null,
+    "created_at": "2026-09-19T10:52:20.616096+00:00"
+  },
+  {
+    "_id": "otp:login:test-594276c6dc@proctor.edu",
+    "email": "test-594276c6dc@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "53debe467e9362acda4bc4f047129970$bd5b90cedd909b912a704b9796b199d234200ef6384b58568a0929c9c776754a",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-19T10:52:21.372065+00:00",
+    "expires_at": 1789815441.372065
+  },
+  {
+    "_id": "otp:login:test-32f5c4ed14@proctor.edu",
+    "email": "test-32f5c4ed14@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "e2fbc30880dab0a9de37e060ccb1d8fa$976690e063e4d134c65f0504e28bbc2b54f4b7b48d0851670026daedc44a6efb",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T10:52:22.521028+00:00",
+    "expires_at": 1789815442.521028,
+    "updated_at": "2026-09-19T10:52:22.562993+00:00"
+  },
+  {
+    "_id": "otp:login:test-9815823e87@proctor.edu",
+    "email": "test-9815823e87@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "638ec8d06b9f6a4f46a630e6bfc52ab8$d99136311091deb5a8d85bad44aa9ab2134efd7c9689a06bcbaf352072b90bbe",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T10:52:22.989157+00:00",
+    "expires_at": 1789815442.989157,
+    "updated_at": "2026-09-19T10:52:23.056282+00:00"
+  },
+  {
+    "_id": "otp:login:stu-fc2229c381@test.local",
+    "email": "stu-fc2229c381@test.local",
+    "purpose": "login",
+    "otp_hash": "5c5a99895f70fb0cdead76fc95bea681$76b3931793b268106249cd4bd65a6633f8efef70724636da4ee0b482e8843f37",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T10:52:23.883364+00:00",
+    "expires_at": 1789815443.883364,
+    "updated_at": "2026-09-19T10:52:23.895027+00:00"
+  },
+  {
+    "_id": "otp:login:prof-ef36579e4d@test.local",
+    "email": "prof-ef36579e4d@test.local",
+    "purpose": "login",
+    "otp_hash": "5c3af454e9e486f74bc9263fb49394db$337934ad97694d14d9ddaee86e30a9aacc56d62f14cb0d4d1278527f359dab14",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T10:52:24.741651+00:00",
+    "expires_at": 1789815444.741651,
+    "updated_at": "2026-09-19T10:52:24.761625+00:00"
+  },
+  {
+    "_id": "otp:login:adm-53bc22c9e6@proctor.edu",
+    "email": "adm-53bc22c9e6@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "ba4f78985240095989d021f307055b76$cf35ac3ee3eb3dcf46b862b8598bb6eec6d909e13f95ced171d28f7ae41fc185",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T10:52:25.654095+00:00",
+    "expires_at": 1789815445.654095,
+    "updated_at": "2026-09-19T10:52:25.671212+00:00"
+  },
+  {
+    "_id": "TAlKL2qZqzI2cGnAmMLO5Q",
+    "type": "revoked_jti",
+    "created_at": "2026-09-19T10:52:27.105311+00:00"
+  },
+  {
+    "_id": "otp:login:otp-c8cddbf1ec@test.local",
+    "email": "otp-c8cddbf1ec@test.local",
+    "purpose": "login",
+    "otp_hash": "20de424d5c495f8b9c291416ea5ba207$65394eb425db6f5bc641743dba3e886e5c1ce8e33f75eaad52301c782f4c144f",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T10:52:27.588312+00:00",
+    "expires_at": 1789815447.588312,
+    "updated_at": "2026-09-19T10:52:27.602224+00:00"
+  },
+  {
+    "_id": "otp:login:otpcool-53f1993f75@test.local",
+    "email": "otpcool-53f1993f75@test.local",
+    "purpose": "login",
+    "otp_hash": "e767e850e1987cd05938a6a44d4f606d$de7b3697914ec6332df82e3e37ac9723a703db3b180329993ffc05fe55911412",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-19T10:52:27.713223+00:00",
+    "expires_at": 1789815447.713223
+  },
+  {
+    "_id": "otp:login:stu-c3f1be3ee7@test.local",
+    "email": "stu-c3f1be3ee7@test.local",
+    "purpose": "login",
+    "otp_hash": "8ac4263cd3229b913533e73296078465$06d7c4d92ef4927a2d033a8c5c3aaf36ca7a9122a0d67176c45de04ad038084f",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-19T10:52:28.680050+00:00",
+    "expires_at": 1789815448.68005
+  },
+  {
+    "_id": "otp:login:stu-a773d1dc4c@test.local",
+    "email": "stu-a773d1dc4c@test.local",
+    "purpose": "login",
+    "otp_hash": "ed47bc716766ff3107347a5b1c7c4ebc$df8fe22c8399e0c04d97b2332b1aa3b65755ff6b2df4068ec874cdff149e51b0",
+    "attempts": 1,
+    "consumed": false,
+    "created_at": "2026-09-19T10:52:30.666812+00:00",
+    "expires_at": 1789815450.666812,
+    "updated_at": "2026-09-19T10:52:30.717429+00:00"
+  },
+  {
+    "_id": "otp:login:stu-f8661aca81@test.local",
+    "email": "stu-f8661aca81@test.local",
+    "purpose": "login",
+    "otp_hash": "a88d1cbd59cfd3b032f5852eb81ba69c$c6977f2b59e7dc5b27b64b5712260df6f3ab88bc45a36a0cd4e6a5e8a003523c",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T10:52:32.825435+00:00",
+    "expires_at": 1789815452.825435,
+    "updated_at": "2026-09-19T10:52:32.836787+00:00"
+  },
+  {
+    "_id": "login_attempts:wrong-012250a1@proctor.edu",
+    "email": "wrong-012250a1@proctor.edu",
+    "attempts": 1,
+    "locked_until": null,
+    "created_at": "2026-09-19T10:53:20.874136+00:00"
+  },
+  {
+    "_id": "otp:login:test-a40c854793@proctor.edu",
+    "email": "test-a40c854793@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "5624c7e96fcc267249ec0aa6947274ac$6bce65f1288cc95f153157a63d14a1b5be86308a80ff4f31778dce5e1b59641e",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-19T10:53:21.637485+00:00",
+    "expires_at": 1789815501.637485
+  },
+  {
+    "_id": "otp:login:test-7488fc8e50@proctor.edu",
+    "email": "test-7488fc8e50@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "32e5331a18213fb02c6d8a6b168a157c$e5c64caaf923b663dfe53a7e78052e84ac178ecae39cefe9d6a2640faa21a7f4",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T10:53:22.839448+00:00",
+    "expires_at": 1789815502.839448,
+    "updated_at": "2026-09-19T10:53:22.857843+00:00"
+  },
+  {
+    "_id": "otp:login:test-a28b6646da@proctor.edu",
+    "email": "test-a28b6646da@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "b84497f161c4825f0467a49222e8de77$c59748727cfd5efc071601a92e9ece9e3a936a47d061dd6031742aa00c1e965c",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T10:53:23.259323+00:00",
+    "expires_at": 1789815503.259323,
+    "updated_at": "2026-09-19T10:53:23.274802+00:00"
+  },
+  {
+    "_id": "otp:login:stu-03973e7e71@test.local",
+    "email": "stu-03973e7e71@test.local",
+    "purpose": "login",
+    "otp_hash": "1d398be92eeefe82f90b020bf957befa$3bd0c32058c5abd13c42590da4ec9f0a933317525ca7282f8d110a2fab5206d2",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T10:53:26.242020+00:00",
+    "expires_at": 1789815506.24202,
+    "updated_at": "2026-09-19T10:53:26.257096+00:00"
+  },
+  {
+    "_id": "otp:login:prof-82e3d0c023@test.local",
+    "email": "prof-82e3d0c023@test.local",
+    "purpose": "login",
+    "otp_hash": "5d8de719d4e1aa2e4792af58b6ce9b90$031c6d546ef40f8f56edc4b3ba0ec7378582a2c87a9d9c1595ef03b1598ad2e7",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T10:53:26.957456+00:00",
+    "expires_at": 1789815506.957456,
+    "updated_at": "2026-09-19T10:53:26.978266+00:00"
+  },
+  {
+    "_id": "otp:login:adm-ecd811e0ca@proctor.edu",
+    "email": "adm-ecd811e0ca@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "69da25111a889f4fd078b4e40844b450$fa8434d43e797fbca852e7bcb97b589b90a98ae7886b32d8aec4214a2293ff4e",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T10:53:27.715766+00:00",
+    "expires_at": 1789815507.715766,
+    "updated_at": "2026-09-19T10:53:27.727992+00:00"
+  },
+  {
+    "_id": "44puv2ZlvCWL2zI062W76A",
+    "type": "revoked_jti",
+    "created_at": "2026-09-19T10:53:28.565937+00:00"
+  },
+  {
+    "_id": "otp:login:otp-52e0478bb6@test.local",
+    "email": "otp-52e0478bb6@test.local",
+    "purpose": "login",
+    "otp_hash": "8abdbf6294a1c4f07fbc47f76f0df18b$eacf536d8bf4baffb6096cd5445b83ac76be028be83fe4106574f2e67b4fa564",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T10:53:29.236392+00:00",
+    "expires_at": 1789815509.236392,
+    "updated_at": "2026-09-19T10:53:29.266191+00:00"
+  },
+  {
+    "_id": "otp:login:otpcool-cb24c2e3e3@test.local",
+    "email": "otpcool-cb24c2e3e3@test.local",
+    "purpose": "login",
+    "otp_hash": "adb27e7bb62919bc28babde4f84f38ce$88515ecf58d88d85946e9c491bb25505c17fc2366a5dd3568a0f461417320310",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-19T10:53:29.402424+00:00",
+    "expires_at": 1789815509.402424
+  },
+  {
+    "_id": "otp:login:stu-5ed6580375@test.local",
+    "email": "stu-5ed6580375@test.local",
+    "purpose": "login",
+    "otp_hash": "ba65028d13c46c8ac1127ebd063bb659$d8bde6c2442b63b5bc426274d66e9d03a6bd9b7b9d1718b1b3a0ecfddd73c7ee",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-19T10:53:30.105082+00:00",
+    "expires_at": 1789815510.105082
+  },
+  {
+    "_id": "otp:login:stu-fac3031520@test.local",
+    "email": "stu-fac3031520@test.local",
+    "purpose": "login",
+    "otp_hash": "fce45ec0f80684800ac424473ff81ae5$59f9a291e6ec381a36fa6381dc4ad6c385390dc20460832afbbfdeb6af05705d",
+    "attempts": 1,
+    "consumed": false,
+    "created_at": "2026-09-19T10:53:30.917699+00:00",
+    "expires_at": 1789815510.917699,
+    "updated_at": "2026-09-19T10:53:30.929399+00:00"
+  },
+  {
+    "_id": "otp:login:stu-0c729f7b64@test.local",
+    "email": "stu-0c729f7b64@test.local",
+    "purpose": "login",
+    "otp_hash": "7fe1af3eca5e374838a75a0170c73fdb$f8dab778c04f597cef24dae5b61d0ae3b352698e6e538332dae5bd92979319f5",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T10:53:32.067449+00:00",
+    "expires_at": 1789815512.067449,
+    "updated_at": "2026-09-19T10:53:32.083825+00:00"
+  },
+  {
+    "_id": "login_attempts:wrong-1894ef26@proctor.edu",
+    "email": "wrong-1894ef26@proctor.edu",
+    "attempts": 1,
+    "locked_until": null,
+    "created_at": "2026-09-19T11:00:31.636675+00:00"
+  },
+  {
+    "_id": "otp:login:test-0015a715ae@proctor.edu",
+    "email": "test-0015a715ae@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "3ea6156d79c8d193d728f80548081233$3cbcd41e91c0f9dde24c5e4ba99bd3b877d851ef4657d25401045b44b656f0d1",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-19T11:00:32.349134+00:00",
+    "expires_at": 1789815932.349134
+  },
+  {
+    "_id": "otp:login:test-d5c7b328a7@proctor.edu",
+    "email": "test-d5c7b328a7@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "2c89ce403dc393076140dd324ec497fa$7d373426f2c0c849acbbbd781483dfd494f6a559b1e8b1cff675f53b596d3097",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T11:00:33.402770+00:00",
+    "expires_at": 1789815933.40277,
+    "updated_at": "2026-09-19T11:00:33.420885+00:00"
+  },
+  {
+    "_id": "otp:login:test-fb88fd8cfa@proctor.edu",
+    "email": "test-fb88fd8cfa@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "ecb5ba700977635136c960afbca9740c$d15cfeed775e3aa01dba001f82746a49b3d52556519fb1b8fe392cec72fef51c",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T11:00:33.791416+00:00",
+    "expires_at": 1789815933.791416,
+    "updated_at": "2026-09-19T11:00:33.805222+00:00"
+  },
+  {
+    "_id": "otp:login:stu-5998aed984@test.local",
+    "email": "stu-5998aed984@test.local",
+    "purpose": "login",
+    "otp_hash": "376ce1c079bd5403b5e353eca12875dd$59206d5d66d19cd328e8f423e55bd2589a1a858ffe59da6f7a7e9ba3dbf9d86a",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T11:00:36.895241+00:00",
+    "expires_at": 1789815936.895241,
+    "updated_at": "2026-09-19T11:00:36.908240+00:00"
+  },
+  {
+    "_id": "otp:login:prof-50333ae4f2@test.local",
+    "email": "prof-50333ae4f2@test.local",
+    "purpose": "login",
+    "otp_hash": "9332cded844158aba000ebf03d314cc7$3ad8bffed4d78283913f4f17d02c38c03e1944068c8de6fe1caa1ada73bf647d",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T11:00:37.615694+00:00",
+    "expires_at": 1789815937.615694,
+    "updated_at": "2026-09-19T11:00:37.630771+00:00"
+  },
+  {
+    "_id": "otp:login:adm-6cf41a4fb9@proctor.edu",
+    "email": "adm-6cf41a4fb9@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "6a0e7e91a8c29f696b6a887f33af524a$57cc255b7a32c449f54ddf3c9985e310f033aa78cbc4408a60eaaed4ad8dfa95",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T11:00:38.466034+00:00",
+    "expires_at": 1789815938.466034,
+    "updated_at": "2026-09-19T11:00:38.485237+00:00"
+  },
+  {
+    "_id": "kEtk-24opVGy4b9eVO6jhg",
+    "type": "revoked_jti",
+    "created_at": "2026-09-19T11:00:39.214467+00:00"
+  },
+  {
+    "_id": "otp:login:otp-50e7198708@test.local",
+    "email": "otp-50e7198708@test.local",
+    "purpose": "login",
+    "otp_hash": "62e761db5001f6007f92bc5ab528d978$e38f87f46be3bdb535e117abff7fc20f7efcd645946f9175325dc1be6efdc177",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T11:00:39.593499+00:00",
+    "expires_at": 1789815939.593499,
+    "updated_at": "2026-09-19T11:00:39.611329+00:00"
+  },
+  {
+    "_id": "otp:login:otpcool-bf0bf99dd4@test.local",
+    "email": "otpcool-bf0bf99dd4@test.local",
+    "purpose": "login",
+    "otp_hash": "20aec278147942d81cadd232a70eb53a$3307cbb6ab0c5c727e6522b7f321bb107c96bd7c348d361ba28ba5c9e6b24fb8",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-19T11:00:39.729900+00:00",
+    "expires_at": 1789815939.7299
+  },
+  {
+    "_id": "otp:login:stu-46ea729846@test.local",
+    "email": "stu-46ea729846@test.local",
+    "purpose": "login",
+    "otp_hash": "6d09cb3bb8e6029c51455304ffa94769$e31e4fa464af4c19c720386ef7197bf2a98a9532cdb51362ce92650e6adfd4c9",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-19T11:00:40.430852+00:00",
+    "expires_at": 1789815940.430852
+  },
+  {
+    "_id": "otp:login:stu-00807d88f8@test.local",
+    "email": "stu-00807d88f8@test.local",
+    "purpose": "login",
+    "otp_hash": "2aa58b171ef57a54cf2c3bc04339ba45$610cb2cf3955d2374343613c9f12a4ff82c03d59c11b129d0ac4c478cbb839d5",
+    "attempts": 1,
+    "consumed": false,
+    "created_at": "2026-09-19T11:00:41.142717+00:00",
+    "expires_at": 1789815941.142717,
+    "updated_at": "2026-09-19T11:00:41.166427+00:00"
+  },
+  {
+    "_id": "otp:login:stu-0215f40dc0@test.local",
+    "email": "stu-0215f40dc0@test.local",
+    "purpose": "login",
+    "otp_hash": "e2bbf9fed9c2297d772c552475c0bd74$7df44654b64183a437f33f49f00e661b0ab6ac666e2811f777b3bb4247e92c61",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T11:00:42.254998+00:00",
+    "expires_at": 1789815942.254998,
+    "updated_at": "2026-09-19T11:00:42.265359+00:00"
+  },
+  {
+    "_id": "login_attempts:wrong-aea5c6ce@proctor.edu",
+    "email": "wrong-aea5c6ce@proctor.edu",
+    "attempts": 1,
+    "locked_until": null,
+    "created_at": "2026-09-19T11:04:46.508899+00:00"
+  },
+  {
+    "_id": "otp:login:test-e96a1cf3d5@proctor.edu",
+    "email": "test-e96a1cf3d5@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "443e079ab9a7859ac623c2f78044ecf9$315b6862b31e89eafa54e8280239a79f137085783e4c9431e836400a520f5329",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-19T11:04:47.326892+00:00",
+    "expires_at": 1789816187.326892
+  },
+  {
+    "_id": "otp:login:test-bf3bad69e4@proctor.edu",
+    "email": "test-bf3bad69e4@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "de53fd4990d667a8d3896c4a176b85bb$a191c3a37e2dcf9183be9f460c06f13f9174083c064bbea2c4f6182b2437cde5",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T11:04:48.442534+00:00",
+    "expires_at": 1789816188.442534,
+    "updated_at": "2026-09-19T11:04:48.456428+00:00"
+  },
+  {
+    "_id": "otp:login:test-870daa27e5@proctor.edu",
+    "email": "test-870daa27e5@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "091007e7a1288fc9328b9293a762fc77$fb61576fff5dae3a1fd95eb03217311a9b830684c46dcd0f44dc6129e3a7ba24",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T11:04:48.826342+00:00",
+    "expires_at": 1789816188.826342,
+    "updated_at": "2026-09-19T11:04:48.840917+00:00"
+  },
+  {
+    "_id": "otp:login:stu-934a481176@test.local",
+    "email": "stu-934a481176@test.local",
+    "purpose": "login",
+    "otp_hash": "31b3892f03677c0308c917a73e5626f0$f9062554f4313a3fb2cc48da31f271ad3a8b556ca0e6fb14c6a871a575a94139",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T11:04:52.206926+00:00",
+    "expires_at": 1789816192.206926,
+    "updated_at": "2026-09-19T11:04:52.224256+00:00"
+  },
+  {
+    "_id": "otp:login:prof-cf990e7d6c@test.local",
+    "email": "prof-cf990e7d6c@test.local",
+    "purpose": "login",
+    "otp_hash": "87eae557f6c0aa4983f093069fbb503b$2155ea2711927399960ab69a2ca1971b47410ed1b4e0ed4b1ef194fb7e2c583d",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T11:04:52.993389+00:00",
+    "expires_at": 1789816192.993389,
+    "updated_at": "2026-09-19T11:04:53.005323+00:00"
+  },
+  {
+    "_id": "otp:login:adm-7e30d51935@proctor.edu",
+    "email": "adm-7e30d51935@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "fa5984640a8f93026b8d3693b33c35eb$e6de6539c7860f0281048875af3a52c9515c1411a7ea8f904a494f9639f540a8",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T11:04:53.923515+00:00",
+    "expires_at": 1789816193.923515,
+    "updated_at": "2026-09-19T11:04:53.942564+00:00"
+  },
+  {
+    "_id": "I6Dt3jAEg2HxyIhrmd4vLw",
+    "type": "revoked_jti",
+    "created_at": "2026-09-19T11:04:54.706523+00:00"
+  },
+  {
+    "_id": "otp:login:otp-4983c57d40@test.local",
+    "email": "otp-4983c57d40@test.local",
+    "purpose": "login",
+    "otp_hash": "9f1f12be95e8b3b49b50d5262d25ca3c$44342a78ab4f883418f56c13844e931a634df3b6b3e2de7c5ac148f4027288be",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T11:04:55.134774+00:00",
+    "expires_at": 1789816195.134774,
+    "updated_at": "2026-09-19T11:04:55.151284+00:00"
+  },
+  {
+    "_id": "otp:login:otpcool-60b20e0176@test.local",
+    "email": "otpcool-60b20e0176@test.local",
+    "purpose": "login",
+    "otp_hash": "6a21554a51a6e1788ac194e773dfb5a4$e33b92b509df2dd5c87b33a39d2c1c737a1fbdfcceb02538d40db3f2f38b53cd",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-19T11:04:55.266503+00:00",
+    "expires_at": 1789816195.266503
+  },
+  {
+    "_id": "otp:login:stu-c57e19b6b9@test.local",
+    "email": "stu-c57e19b6b9@test.local",
+    "purpose": "login",
+    "otp_hash": "1ab2fefaf63f07f8d98b9b93cfe1ae11$ac7befe6b1c629497b2b5dbc2ff4c0e2dcaff89382d37cf3a121de36eec81137",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-19T11:04:55.961554+00:00",
+    "expires_at": 1789816195.961554
+  },
+  {
+    "_id": "otp:login:stu-315a0db84c@test.local",
+    "email": "stu-315a0db84c@test.local",
+    "purpose": "login",
+    "otp_hash": "097f90f1a5ed41df00ab6b1429299a5c$83447eab6b929a6453a032c61323ff54c90f79534c1501a356473a8245369a78",
+    "attempts": 1,
+    "consumed": false,
+    "created_at": "2026-09-19T11:04:56.910759+00:00",
+    "expires_at": 1789816196.910759,
+    "updated_at": "2026-09-19T11:04:56.922912+00:00"
+  },
+  {
+    "_id": "otp:login:stu-32d5b8d596@test.local",
+    "email": "stu-32d5b8d596@test.local",
+    "purpose": "login",
+    "otp_hash": "21d79b013541cdb6ee1db772d563ed44$5231601c3a9bae55a31507ddfce997631d30f7aadd89273526f6d0f0b681aa93",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T11:04:58.027082+00:00",
+    "expires_at": 1789816198.027082,
+    "updated_at": "2026-09-19T11:04:58.047848+00:00"
+  },
+  {
+    "_id": "login_attempts:wrong-bfb287b8@proctor.edu",
+    "email": "wrong-bfb287b8@proctor.edu",
+    "attempts": 1,
+    "locked_until": null,
+    "created_at": "2026-09-19T11:24:53.165703+00:00"
+  },
+  {
+    "_id": "otp:login:test-76ce72a2ed@proctor.edu",
+    "email": "test-76ce72a2ed@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "46ebbf7a3f5e0774d8db6e28402b729f$b09a30e6d0376ee843da4edefb766912fe8f3af47fb45f0749c47d324ee6ceb7",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-19T11:24:53.841323+00:00",
+    "expires_at": 1789817393.841323
+  },
+  {
+    "_id": "otp:login:test-36a0c23854@proctor.edu",
+    "email": "test-36a0c23854@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "3b30cdca923c2813a468e1f07dda006f$221bfd9cd772c40d8f484e13829c847e8f263180a1314b2d4fbcab45dd49ed68",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T11:24:54.848287+00:00",
+    "expires_at": 1789817394.848287,
+    "updated_at": "2026-09-19T11:24:54.867765+00:00"
+  },
+  {
+    "_id": "otp:login:test-99165f978c@proctor.edu",
+    "email": "test-99165f978c@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "70a6ba28bc20abb88e46b28754b12313$7b529d2e6a83e38e4b86e263e61080f8da9ed5b7047cf2cdda714e5a26b3de72",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T11:24:55.243895+00:00",
+    "expires_at": 1789817395.243895,
+    "updated_at": "2026-09-19T11:24:55.256633+00:00"
+  },
+  {
+    "_id": "otp:login:stu-928f79d643@test.local",
+    "email": "stu-928f79d643@test.local",
+    "purpose": "login",
+    "otp_hash": "c626df3ab146b2fd5f02109309f30bf3$aafcdbd48dfcaf48c8f322eff570fc452ed628724dcd0988292ac7d8da1f8fdf",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T11:24:57.993723+00:00",
+    "expires_at": 1789817397.993723,
+    "updated_at": "2026-09-19T11:24:58.017972+00:00"
+  },
+  {
+    "_id": "otp:login:prof-fa9e9f0ee0@test.local",
+    "email": "prof-fa9e9f0ee0@test.local",
+    "purpose": "login",
+    "otp_hash": "8cf73dc5c357c6fb1c8aa23893f09da7$e176e1391e2c6c7c18074c41c005d6064b0a5f930625187b311b1267dda38197",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T11:24:58.691357+00:00",
+    "expires_at": 1789817398.691357,
+    "updated_at": "2026-09-19T11:24:58.703169+00:00"
+  },
+  {
+    "_id": "otp:login:adm-65dad44523@proctor.edu",
+    "email": "adm-65dad44523@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "b8e8e8479b199dddec2af1a1b0b248dd$1496571291087973d41c4724fd9199717a5ee8127a41836faad66638c4a28ad7",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T11:24:59.383197+00:00",
+    "expires_at": 1789817399.383197,
+    "updated_at": "2026-09-19T11:24:59.414461+00:00"
+  },
+  {
+    "_id": "h7hPCW6EHKiP5kSpO8y1cg",
+    "type": "revoked_jti",
+    "created_at": "2026-09-19T11:25:00.148974+00:00"
+  },
+  {
+    "_id": "otp:login:otp-c3a7532f0e@test.local",
+    "email": "otp-c3a7532f0e@test.local",
+    "purpose": "login",
+    "otp_hash": "0720f80ce1fcdab00804a1994823c82a$f9930f85c0c32e3adab144b664e065455d19c85467c5b71a68367d5f5cd01827",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T11:25:00.534538+00:00",
+    "expires_at": 1789817400.534538,
+    "updated_at": "2026-09-19T11:25:00.546743+00:00"
+  },
+  {
+    "_id": "otp:login:otpcool-3344566c7d@test.local",
+    "email": "otpcool-3344566c7d@test.local",
+    "purpose": "login",
+    "otp_hash": "60fe87d0710c38236caa88ca68d8fbc6$7e9a6887489ca60de60a1ff6f000899c2ef891bf6b1ecb8d454d18b550da44ee",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-19T11:25:00.630628+00:00",
+    "expires_at": 1789817400.630628
+  },
+  {
+    "_id": "otp:login:stu-359fc73422@test.local",
+    "email": "stu-359fc73422@test.local",
+    "purpose": "login",
+    "otp_hash": "b7b07121aac63075c37dd94c81f7723a$8039540e6fee98338e32e880387ea7bd9fdcb9f574cded43fdccbb029a9aea7e",
+    "attempts": 0,
+    "consumed": false,
+    "created_at": "2026-09-19T11:25:01.296251+00:00",
+    "expires_at": 1789817401.296251
+  },
+  {
+    "_id": "otp:login:stu-04766b9bb2@test.local",
+    "email": "stu-04766b9bb2@test.local",
+    "purpose": "login",
+    "otp_hash": "a80485686fb8a7f19ef88e9d6a92f1ea$2f14a899538af3e48ccafc10e5280bdf05262278f79aa1c70595e766479b144e",
+    "attempts": 1,
+    "consumed": false,
+    "created_at": "2026-09-19T11:25:02.009639+00:00",
+    "expires_at": 1789817402.009639,
+    "updated_at": "2026-09-19T11:25:02.022976+00:00"
+  },
+  {
+    "_id": "otp:login:stu-fe1503715d@test.local",
+    "email": "stu-fe1503715d@test.local",
+    "purpose": "login",
+    "otp_hash": "6c6a9f0f123780451fd93acceda271f0$6ba9070377f1828580066ad5e9cef36a1faab23ce1b2f6ddb02a44dfa3f9a950",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T11:25:03.048175+00:00",
+    "expires_at": 1789817403.048175,
+    "updated_at": "2026-09-19T11:25:03.061276+00:00"
+  },
+  {
+    "_id": "otp:login:student@proctor.edu",
+    "email": "student@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "d8240e11178a8ff2915adc8d7ace4bf3$7f7b3e394f22568d30e8e46118ab3aa56c436a990fc9bf03367238c461f2bd1c",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T11:25:07.319928+00:00",
+    "expires_at": 1789817407.319928,
+    "updated_at": "2026-09-19T11:25:07.333498+00:00"
+  },
+  {
+    "_id": "otp:login:admin@proctor.edu",
+    "email": "admin@proctor.edu",
+    "purpose": "login",
+    "otp_hash": "51fd9a5ff6afe1baa459b7b6834490a3$64f721af7c42a235324335e75f27d45e18e557444efa9f04108dcef2f7590ab3",
+    "attempts": 0,
+    "consumed": true,
+    "created_at": "2026-09-19T11:25:08.204596+00:00",
+    "expires_at": 1789817408.204596,
+    "updated_at": "2026-09-19T11:25:08.214395+00:00"
+  }
+]

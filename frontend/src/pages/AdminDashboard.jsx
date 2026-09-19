@@ -120,7 +120,7 @@ export default function AdminDashboard({ onSelectReport, onGoLive, onOpenProfile
           </p>
         </div>
 
-        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+        <div className="admin-dashboard-actions" style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
           {onOpenProfile && (
             <button
               onClick={onOpenProfile}
@@ -203,7 +203,7 @@ export default function AdminDashboard({ onSelectReport, onGoLive, onOpenProfile
       </div>
 
       {/* Analytics Charts Row */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr', gap: '1.5rem', marginBottom: '2.5rem' }}>
+      <div className="admin-dashboard-charts" style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr', gap: '1.5rem', marginBottom: '2.5rem' }}>
         <div className="glass-card">
           <h3 style={{ fontSize: '1.05rem', marginBottom: '1rem' }}>Flagged Suspicious Incidents by Type</h3>
           <IncidentBreakdownChart data={charts.events_by_type || {}} />
@@ -253,7 +253,7 @@ export default function AdminDashboard({ onSelectReport, onGoLive, onOpenProfile
         </div>
 
         {activeTab === 'sessions' ? (
-          <div className="glass-card" style={{ padding: 0, overflow: 'hidden' }}>
+           <div className="glass-card admin-dashboard-table" style={{ padding: 0, overflowX: 'auto' }}>
             <table className="data-table">
               <thead>
                 <tr>
@@ -331,7 +331,7 @@ export default function AdminDashboard({ onSelectReport, onGoLive, onOpenProfile
             </table>
           </div>
         ) : (
-          <div className="glass-card" style={{ padding: 0, overflow: 'hidden' }}>
+           <div className="glass-card admin-dashboard-table" style={{ padding: 0, overflowX: 'auto' }}>
             <table className="data-table">
               <thead>
                 <tr>

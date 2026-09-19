@@ -1,116 +1,194 @@
-import urllib.request
-import json
+"""
+Full end-to-end system test suite using TestClient (in-process).
+
+Tests the complete workflow: student OTP login → exam discovery → system check →
+face verification → exam attempt → proctoring → demo simulation → submission →
+admin OTP login → dashboard/sessions/reports.
+
+Adapted for Phase 2 two-step OTP login flow.
+"""
 import base64
 import cv2
 import numpy as np
+import pytest
+from fastapi.testclient import TestClient
+from backend.app import app
+from backend.config.db import get_sessions_col
 
-BASE_URL = 'http://127.0.0.1:8000/api'
 
-def post(url, data, token=None):
-    headers = {'Content-Type': 'application/json'}
-    if token:
-        headers['Authorization'] = f'Bearer {token}'
-    req = urllib.request.Request(f'{BASE_URL}{url}', data=json.dumps(data).encode('utf-8'), headers=headers, method='POST')
-    with urllib.request.urlopen(req) as resp:
-        return json.loads(resp.read().decode('utf-8'))
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
 
-def get(url, token=None):
-    headers = {}
-    if token:
-        headers['Authorization'] = f'Bearer {token}'
-    req = urllib.request.Request(f'{BASE_URL}{url}', headers=headers, method='GET')
-    with urllib.request.urlopen(req) as resp:
-        return json.loads(resp.read().decode('utf-8'))
+def _capture_otp_login(client, email, password):
+    """Drive the full two-step OTP login and return (token, headers, user_dict)."""
+    from backend.services import otp_service as otp_mod
 
-print('================================================================')
-print('        STARTING FULL END-TO-END SYSTEM TEST SUITE             ')
-print('================================================================')
+    # Clear any stale OTP record for this email to avoid cooldown
+    get_sessions_col().delete_one({"_id": f"otp:login:{email.lower().strip()}"})
 
-# 1. Student Authentication
-print('\n[1/8] Testing Student Authentication...')
-auth = post('/auth/login', {'email': 'student@proctor.edu', 'password': 'Student@123'})
-student_token = auth['access_token']
-student_user = auth['user']
-print(f'  [OK] Logged in as: {student_user["name"]} ({student_user["email"]})')
+    captured = {}
+    orig = otp_mod.get_otp_provider
 
-# 2. Fetch Exams and Details
-print('\n[2/8] Testing Examination Discovery...')
-exams = get('/exams', student_token)
-assert len(exams) > 0, 'No exams found'
-exam_summary = exams[0]
-exam = get(f'/exams/{exam_summary["id"]}', student_token)
-print(f'  [OK] Exam loaded: "{exam["title"]}" with {len(exam.get("questions", []))} questions.')
+    class _CapturingProvider:
+        def send(self, email_addr, otp_code, purpose):
+            captured["otp"] = otp_code
 
-# 3. Create Synthetic Camera Frame
-print('\n[3/8] Generating Camera Test Frames...')
-frame = np.ones((480, 640, 3), dtype=np.uint8) * 180
-cv2.ellipse(frame, (320, 240), (90, 130), 0, 0, 360, (130, 160, 210), -1)
-cv2.circle(frame, (280, 210), 12, (50, 50, 50), -1)
-cv2.circle(frame, (360, 210), 12, (50, 50, 50), -1)
-cv2.ellipse(frame, (320, 300), (35, 15), 0, 0, 180, (50, 50, 150), -1)
-_, buf = cv2.imencode('.jpg', frame)
-frame_b64 = 'data:image/jpeg;base64,' + base64.b64encode(buf).decode('utf-8')
+    otp_mod.get_otp_provider = lambda: _CapturingProvider()
 
-# 4. System Check & Baseline Face Registration
-print('\n[4/8] Testing System Check & Face Verification...')
-sys_check = post('/proctoring/system-check', {'image_base64': frame_b64}, student_token)
-print(f'  [OK] System Check: Camera={sys_check["camera_ready"]}, Lighting={sys_check["lighting_ok"]}, Brightness={sys_check["brightness_score"]}/255')
+    try:
+        # Phase 1 – credentials → challenge
+        c = client.post("/api/auth/login", json={"email": email, "password": password})
+        assert c.status_code == 200, f"Login challenge failed: {c.json()}"
+        assert "challenge_token" in c.json()
+        assert "access_token" not in c.json()
 
-reg_face = post('/proctoring/update-face-reference', {'image_base64': frame_b64}, student_token)
-print(f'  [OK] Baseline Face Registered: Success={reg_face["success"]}, Message="{reg_face["message"]}"')
+        otp_val = captured.get("otp")
+        assert otp_val is not None, "OTP was not captured – provider not called"
 
-verify_face = post('/proctoring/verify-face', {'query_image': frame_b64}, student_token)
-print(f'  [OK] Face Identity Verified: Verified={verify_face["verified"]}, Similarity={verify_face.get("similarity_percent", 100)}%')
+        # Phase 2 – OTP verification → JWT
+        v = client.post(
+            "/api/auth/login/verify",
+            json={"challenge_token": c.json()["challenge_token"], "otp": otp_val},
+        )
+        assert v.status_code == 200, f"OTP verify failed: {v.json()}"
+        assert "access_token" in v.json()
 
-# 5. Start Exam Attempt
-print('\n[5/8] Testing Exam Attempt Creation...')
-start_res = post('/attempts/start', {'exam_id': exam['id'], 'verified_face_reference': frame_b64}, student_token)
-attempt = start_res['attempt']
-attempt_id = attempt['id']
-print(f'  [OK] Attempt initialized: ID={attempt_id}, Status={attempt["status"]}')
+        token = v.json()["access_token"]
+        user = v.json()["user"]
+        headers = {"Authorization": f"Bearer {token}"}
+        return token, headers, user
+    finally:
+        otp_mod.get_otp_provider = orig
 
-# 6. Live Proctoring & Anomaly Engine
-print('\n[6/8] Testing Live AI Frame Proctoring & Violation Detection...')
-proc_frame = post('/proctoring/frame', {
-    'attempt_id': attempt_id,
-    'image_base64': frame_b64,
-    'audio_energy': 0.06
-}, student_token)
-print(f'  [OK] Frame Processed: Person Count={proc_frame.get("person_count")}, Phone Status={proc_frame.get("phone_status")}')
-print(f'  [OK] Live Telemetry: Risk Level={proc_frame["risk_level"]}, Suspicion Score={proc_frame["suspicion_score"]} pts')
 
-sim_phone = post('/demo/simulate', {
-    'attempt_id': attempt_id,
-    'event_type': 'MOBILE_PHONE_DETECTED',
-    'confidence': 0.95
-}, student_token)
-print(f'  [OK] Violation Triggered: {sim_phone["event"]} (+{sim_phone["points_added"]} pts) -> New Score: {sim_phone["new_suspicion_score"]} ({sim_phone["risk_level"]})')
+# ---------------------------------------------------------------------------
+# Tests
+# ---------------------------------------------------------------------------
 
-# 7. Answer Questions & Final Submission
-print('\n[7/8] Testing Answer Saving & Exam Submission...')
-answers_map = {}
-for i, q in enumerate(exam.get('questions', [])):
-    q_id = q.get('id') or q.get('_id')
-    post(f'/attempts/{attempt_id}/answer', {'question_id': q_id, 'selected_option': 0}, student_token)
-    answers_map[q_id] = 0
+@pytest.fixture(scope="module")
+def client():
+    return TestClient(app)
 
-submit_res = post(f'/attempts/{attempt_id}/submit', {'answers': answers_map}, student_token)
-print(f'  [OK] Exam Successfully Submitted: Status={submit_res.get("status")}, Score={submit_res.get("score")}%')
 
-# 8. Admin Surveillance & Proctoring Report Generation
-print('\n[8/8] Testing Admin Surveillance & Audit Reports...')
-admin_auth = post('/auth/login', {'email': 'admin@proctor.edu', 'password': 'Admin@123'})
-admin_token = admin_auth['access_token']
+def test_full_system_flow(client):
+    """Complete E2E: student login → exam → proctoring → submit → admin login → reports."""
 
-dash = get('/admin/dashboard', admin_token)
-print(f'  [OK] Admin Dashboard Verified: Total Students={dash["metrics"]["total_students"]}, Completed Exams={dash["metrics"]["completed_exams"]}')
+    # 1. Student Authentication (OTP login)
+    student_token, student_headers, student_user = _capture_otp_login(
+        client, "student@proctor.edu", "Student@123"
+    )
+    assert student_user["role"] == "student"
 
-sessions = get('/admin/sessions', admin_token)
-print(f'  [OK] Admin Active Sessions: Count={len(sessions)}')
+    # 2. Fetch Exams and Details (pick one with questions)
+    exams = client.get("/api/exams", headers=student_headers).json()
+    assert len(exams) > 0, "No exams found"
+    exam_summary = None
+    for e in exams:
+        if e.get("questions_count", 0) >= 1:
+            exam_summary = e
+            break
+    assert exam_summary is not None, "No exam with questions found"
+    exam = client.get(
+        f"/api/exams/{exam_summary['id']}", headers=student_headers
+    ).json()
+    assert len(exam.get("questions", [])) >= 1, "Exam has no questions"
 
-report = get(f'/admin/reports/{attempt_id}', admin_token)
-print(f'  [OK] Attempt Report Verified: Candidate="{report.get("student_name")}", Suspicion Score={report.get("suspicion_score")}')
+    # 3. Create Synthetic Camera Frame
+    frame = np.ones((480, 640, 3), dtype=np.uint8) * 180
+    cv2.ellipse(frame, (320, 240), (90, 130), 0, 0, 360, (130, 160, 210), -1)
+    cv2.circle(frame, (280, 210), 12, (50, 50, 50), -1)
+    cv2.circle(frame, (360, 210), 12, (50, 50, 50), -1)
+    cv2.ellipse(frame, (320, 300), (35, 15), 0, 0, 180, (50, 50, 150), -1)
+    _, buf = cv2.imencode(".jpg", frame)
+    frame_b64 = "data:image/jpeg;base64," + base64.b64encode(buf).decode("utf-8")
 
-print('\n================================================================')
-print('  ALL 8 CORE MODULES & WORKFLOWS ARE WORKING 100% PERFECTLY!    ')
-print('================================================================')
+    # 4. System Check & Baseline Face Registration
+    sys_check = client.post(
+        "/api/proctoring/system-check",
+        json={"image_base64": frame_b64},
+        headers=student_headers,
+    ).json()
+    assert sys_check["camera_ready"] is True
+
+    reg_face = client.post(
+        "/api/proctoring/update-face-reference",
+        json={"image_base64": frame_b64},
+        headers=student_headers,
+    ).json()
+    assert reg_face["success"] is True
+
+    verify_face = client.post(
+        "/api/proctoring/verify-face",
+        json={"query_image": frame_b64},
+        headers=student_headers,
+    ).json()
+    assert verify_face["verified"] is True
+
+    # 5. Start Exam Attempt
+    start_res = client.post(
+        "/api/attempts/start",
+        json={"exam_id": exam["id"], "verified_face_reference": frame_b64},
+        headers=student_headers,
+    ).json()
+    attempt = start_res["attempt"]
+    attempt_id = attempt["id"]
+    assert attempt["status"] == "in_progress"
+
+    # 6. Live Proctoring & Anomaly Engine
+    proc_frame = client.post(
+        "/api/proctoring/frame",
+        json={
+            "attempt_id": attempt_id,
+            "image_base64": frame_b64,
+            "audio_energy": 0.06,
+        },
+        headers=student_headers,
+    ).json()
+    assert "risk_level" in proc_frame
+
+    sim_phone = client.post(
+        "/api/demo/simulate",
+        json={
+            "attempt_id": attempt_id,
+            "event_type": "MOBILE_PHONE_DETECTED",
+            "confidence": 0.95,
+        },
+        headers=student_headers,
+    ).json()
+    assert sim_phone["event"] == "MOBILE_PHONE_DETECTED"
+
+    # 7. Answer Questions & Final Submission
+    answers_map = {}
+    for q in exam.get("questions", []):
+        q_id = q.get("id") or q.get("_id")
+        client.post(
+            f"/api/attempts/{attempt_id}/answer",
+            json={"question_id": q_id, "selected_option": 0},
+            headers=student_headers,
+        )
+        answers_map[q_id] = 0
+
+    submit_res = client.post(
+        f"/api/attempts/{attempt_id}/submit",
+        json={"answers": answers_map},
+        headers=student_headers,
+    ).json()
+    assert submit_res.get("status") == "submitted"
+
+    # 8. Admin Authentication (OTP login)
+    admin_token, admin_headers, admin_user = _capture_otp_login(
+        client, "admin@proctor.edu", "Admin@123"
+    )
+    assert admin_user["role"] == "admin"
+
+    dash = client.get("/api/admin/dashboard", headers=admin_headers).json()
+    assert "metrics" in dash
+
+    sessions = client.get("/api/admin/sessions", headers=admin_headers).json()
+    assert isinstance(sessions, list)
+
+    report = client.get(
+        f"/api/admin/reports/{attempt_id}", headers=admin_headers
+    ).json()
+    assert report.get("student_info", {}).get("name") is not None

@@ -1,16 +1,21 @@
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from typing import Dict, Any, Optional
 from fastapi import HTTPException, status
-from backend.config.db import get_users_col
+from backend.config.db import get_users_col, get_sessions_col
 from backend.models.entities import UserEntity, RoleEnum
 from backend.models.schemas import RegisterRequest, LoginRequest, UserProfileUpdateRequest
-from backend.utils.security import hash_password, verify_password, create_access_token
+from backend.utils.security import hash_password, verify_password, create_access_token, decode_access_token
+from backend.config.settings import settings
+from backend.services.session_store import session_store
+from backend.services.otp_service import otp_service
 import logging
 
 logger = logging.getLogger(__name__)
 
+VALID_SELF_REGISTRATION_ROLES = (RoleEnum.STUDENT, RoleEnum.PROFESSOR)
+
 class AuthService:
-    def register_user(self, req: RegisterRequest) -> Dict[str, Any]:
+    def register_user(self, req: RegisterRequest, allow_admin: bool = False) -> Dict[str, Any]:
         users_col = get_users_col()
         existing = users_col.find_one({"email": req.email.lower()})
         if existing:
@@ -19,18 +24,26 @@ class AuthService:
                 detail="User with this email already exists"
             )
 
-        role = req.role.lower() if req.role in [RoleEnum.STUDENT, RoleEnum.ADMIN] else RoleEnum.STUDENT
-        subject = req.subject.strip() if req.subject else ("All Subjects" if role == RoleEnum.ADMIN else None)
-        
+        role = req.role.lower()
+        # Block self-registration as admin unless explicitly allowed (admin invite path).
+        allowed = set(VALID_SELF_REGISTRATION_ROLES)
+        if allow_admin:
+            allowed.add(RoleEnum.ADMIN)
+        if role not in allowed:
+            role = RoleEnum.STUDENT
+        subject = req.subject.strip() if req.subject else (
+            "All Subjects" if role == RoleEnum.ADMIN else (req.subject or "All Subjects" if role == RoleEnum.PROFESSOR else None)
+        )
+
         user_doc = {
             "name": req.name.strip(),
             "email": req.email.lower().strip(),
             "password_hash": hash_password(req.password),
             "role": role,
-            "subject": subject,
-            "student_id": req.student_id or f"STU{int(datetime.utcnow().timestamp()) % 100000:05d}",
+            "subject": subject if role in (RoleEnum.ADMIN, RoleEnum.PROFESSOR) else None,
+            "student_id": req.student_id or (f"STU{int(datetime.now(timezone.utc).timestamp()) % 100000:05d}" if role == RoleEnum.STUDENT else None),
             "face_reference": req.face_reference,
-            "created_at": datetime.utcnow().isoformat()
+            "created_at": datetime.now(timezone.utc).isoformat()
         }
 
         res = users_col.insert_one(user_doc)
@@ -61,21 +74,94 @@ class AuthService:
         }
 
     def login_user(self, req: LoginRequest) -> Dict[str, Any]:
+        """Phase 1 of login: validate credentials and return an OTP challenge.
+
+        Correct credentials DO NOT yield a JWT here. Instead we verify the
+        email/password, generate and deliver a one-time code to the *registered*
+        email, and return a short-lived, non-sensitive challenge token that the
+        client presents back together with the code to complete authentication.
+        """
         users_col = get_users_col()
-        user = users_col.find_one({"email": req.email.lower().strip()})
+        email_key = req.email.lower().strip()
+        user = users_col.find_one({"email": email_key})
+        if not user:
+            # Still consult rate-limiter to mitigate user enumeration + brute force.
+            self._check_login_locked(email_key)
+            self._record_failed_login(email_key)
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid email or password"
+            )
+
+        self._check_login_locked(email_key)
+
+        if not verify_password(req.password, user.get("password_hash", "")):
+            self._record_failed_login(email_key)
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid email or password"
+            )
+
+        self._clear_failed_logins(email_key)
+
+        registered_email = user.get("email") or email_key
+
+        # Generate & deliver the OTP to the REGISTERED email (never an arbitrary
+        # client-supplied address). Failures are surfaced without leaking the OTP.
+        otp_service.generate_and_send(registered_email, purpose="login")
+
+        challenge_token = create_access_token(
+            {
+                "sub": str(user["_id"]),
+                "email": registered_email,
+                "type": "login_challenge",
+            },
+            expires_delta=timedelta(seconds=settings.OTP_TTL_SECONDS),
+        )
+
+        return {
+            "message": "A verification code has been sent to your registered email",
+            "challenge_token": challenge_token,
+            "email": self._mask_email(registered_email),
+            "expires_in_seconds": settings.OTP_TTL_SECONDS,
+        }
+
+    def verify_login_otp(self, challenge_token: str, otp: str) -> Dict[str, Any]:
+        """Phase 2 of login: verify the OTP and, only on success, issue the JWT.
+
+        The registered email is taken from the signed challenge token (never from
+        the client), so the OTP can only be verified against the account that
+        actually passed credential validation.
+        """
+        payload = decode_access_token(challenge_token)
+        if not payload or payload.get("type") != "login_challenge":
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid or expired login challenge",
+            )
+        registered_email = payload.get("email")
+        sub = payload.get("sub")
+        if not registered_email or not sub:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid or expired login challenge",
+            )
+
+        # Let otp_service.verify raise its precise 400/429 errors for
+        # wrong/expired/reused/exhausted codes.
+        otp_service.verify(registered_email, otp, purpose="login")
+
+        users_col = get_users_col()
+        user = users_col.find_one({"_id": sub}) or users_col.find_one({"email": registered_email})
         if not user:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Invalid email or password"
+                detail="User associated with login challenge no longer exists",
             )
 
-        if not verify_password(req.password, user.get("password_hash", "")):
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Invalid email or password"
-            )
-
-        user_subject = user.get("subject") or ("All Subjects" if user.get("role") == "admin" else None)
+        user_subject = user.get("subject") or (
+            "All Subjects" if user.get("role") in ("admin", "professor") else None
+        )
 
         token = create_access_token({
             "sub": str(user["_id"]),
@@ -99,6 +185,80 @@ class AuthService:
                 "face_reference": user.get("face_reference")
             }
         }
+
+    @staticmethod
+    def _mask_email(email: str) -> str:
+        """Mask an email for display (never returns a secret, just avoids echoing
+        the full address while still letting the user confirm which inbox to check)."""
+        try:
+            local, _, domain = email.partition("@")
+            if not domain:
+                return email
+            visible = local[:2] if len(local) > 2 else local[0]
+            return f"{visible}***@{domain}"
+        except Exception:
+            return "***"
+
+    # ---- Login rate limiting / lockout helpers ----
+
+    def _rate_key(self, email_key: str) -> str:
+        return f"login_attempts:{email_key.lower().strip()}"
+
+    def _get_rate_record(self, email_key: str) -> Optional[Dict[str, Any]]:
+        sessions_col = get_sessions_col()
+        return sessions_col.find_one({"_id": self._rate_key(email_key)})
+
+    def _check_login_locked(self, email_key: str) -> None:
+        rec = self._get_rate_record(email_key)
+        if not rec:
+            return
+        now = datetime.now(timezone.utc)
+        locked_until = rec.get("locked_until")
+        until = None
+        if locked_until:
+            try:
+                until = datetime.fromisoformat(locked_until)
+            except (TypeError, ValueError):
+                until = None
+        if until and now < until:
+            remaining = int((until - now).total_seconds())
+            raise HTTPException(
+                status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+                detail=f"Too many failed login attempts. Try again in {remaining} seconds.",
+            )
+
+    def _record_failed_login(self, email_key: str) -> None:
+        sessions_col = get_sessions_col()
+        key = self._rate_key(email_key)
+        rec = sessions_col.find_one({"_id": key})
+        now = datetime.now(timezone.utc)
+        attempts = int(rec.get("attempts", 0)) + 1 if rec else 1
+        locked_iso = None
+        if attempts >= settings.LOGIN_MAX_ATTEMPTS:
+            locked_iso = datetime.fromtimestamp(
+                now.timestamp() + settings.LOGIN_LOCKOUT_SECONDS, tz=timezone.utc
+            ).isoformat()
+
+        new_rec = {
+            "_id": key,
+            "email": email_key,
+            "attempts": attempts,
+            "locked_until": locked_iso,
+            "created_at": rec.get("created_at", now.isoformat()) if rec else now.isoformat(),
+        }
+        if rec:
+            sessions_col.delete_one({"_id": key})
+        sessions_col.insert_one(new_rec)
+
+    def _clear_failed_logins(self, email_key: str) -> None:
+        sessions_col = get_sessions_col()
+        sessions_col.delete_one({"_id": self._rate_key(email_key)})
+
+    def logout(self, jti: str) -> Dict[str, Any]:
+        """Revoke the session identified by its JWT ``jti`` so the token is rejected."""
+        if jti:
+            session_store.revoke(jti)
+        return {"message": "Successfully logged out"}
 
     def update_user_profile(self, user_id: str, req: UserProfileUpdateRequest) -> Dict[str, Any]:
         users_col = get_users_col()
@@ -131,8 +291,8 @@ class AuthService:
             if clean_student_id:
                 updates["student_id"] = clean_student_id
 
-        # 3. Update Subject Domain (for admin role)
-        if req.subject is not None and user.get("role") == RoleEnum.ADMIN:
+        # 3. Update Subject Domain (for admin/professor role)
+        if req.subject is not None and user.get("role") in (RoleEnum.ADMIN, RoleEnum.PROFESSOR):
             clean_subject = req.subject.strip() or "All Subjects"
             updates["subject"] = clean_subject
 
@@ -178,7 +338,7 @@ class AuthService:
 
         # Fetch fresh updated document
         updated_user = users_col.find_one({"_id": target_id}) or users_col.find_one({"_id": user["_id"]}) or {**user, **updates}
-        user_subject = updated_user.get("subject") or ("All Subjects" if updated_user.get("role") == "admin" else None)
+        user_subject = updated_user.get("subject") or ("All Subjects" if updated_user.get("role") in ("admin", "professor") else None)
 
         # Generate renewed JWT token with latest claims
         token = create_access_token({

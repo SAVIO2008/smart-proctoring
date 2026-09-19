@@ -10,27 +10,49 @@ class Settings(BaseModel):
     VERSION: str = "1.0.0"
     API_PREFIX: str = "/api"
     
-    HOST: str = os.getenv("HOST", "127.0.0.1")
+    HOST: str = os.getenv("HOST", "0.0.0.0")
     PORT: int = int(os.getenv("PORT", 8000))
-    DEBUG: bool = os.getenv("DEBUG", "True").lower() in ("true", "1")
+    DEBUG: bool = os.getenv("DEBUG", "False").lower() in ("true", "1")
     
     # CORS
-    CORS_ORIGINS: List[str] = [
-        "http://localhost:5173",
-        "http://localhost:3000",
-        "http://127.0.0.1:5173",
-        "http://127.0.0.1:3000",
-        "*"
-    ]
+    CORS_ORIGINS: List[str] = os.getenv(
+        "CORS_ORIGINS",
+        "http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173,http://127.0.0.1:3000"
+    ).split(",")
     
     # Database
+    # "mongodb" = require MongoDB Atlas (production). "local" = file-backed JSON (dev/demo).
+    DATABASE_MODE: str = os.getenv("DATABASE_MODE", "mongodb").strip().lower()
     MONGODB_URI: str = os.getenv("MONGODB_URI", "mongodb://localhost:27017")
     DATABASE_NAME: str = os.getenv("DATABASE_NAME", "smart_proctor_db")
+    # Directory used by the file-backed storage when DATABASE_MODE=local.
+    DATA_STORE_DIR: str = os.getenv("DATA_STORE_DIR", "./data_store")
     
     # Security
     JWT_SECRET_KEY: str = os.getenv("JWT_SECRET_KEY", "smart_proctoring_super_secret_jwt_key_2026_change_in_production")
     JWT_ALGORITHM: str = os.getenv("JWT_ALGORITHM", "HS256")
     ACCESS_TOKEN_EXPIRE_MINUTES: int = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 480))
+    
+    # Login rate limiting / lockout
+    LOGIN_MAX_ATTEMPTS: int = int(os.getenv("LOGIN_MAX_ATTEMPTS", 5))
+    LOGIN_LOCKOUT_SECONDS: int = int(os.getenv("LOGIN_LOCKOUT_SECONDS", 900))
+    
+    # OTP configuration
+    OTP_LENGTH: int = int(os.getenv("OTP_LENGTH", 6))
+    OTP_TTL_SECONDS: int = int(os.getenv("OTP_TTL_SECONDS", 300))
+    OTP_MAX_ATTEMPTS: int = int(os.getenv("OTP_MAX_ATTEMPTS", 5))
+    OTP_RESEND_COOLDOWN_SECONDS: int = int(os.getenv("OTP_RESEND_COOLDOWN_SECONDS", 60))
+    OTP_PROVIDER: str = os.getenv("OTP_PROVIDER", "console").strip().lower()
+    # When True, the console provider logs the plaintext OTP. FOR LOCAL TESTING ONLY.
+    # Never enable in production. Defaults off.
+    DEV_ECHO_OTP: bool = os.getenv("DEV_ECHO_OTP", "False").lower() in ("true", "1")
+    # SMTP provider (used when OTP_PROVIDER=smtp)
+    SMTP_HOST: str = os.getenv("SMTP_HOST", "")
+    SMTP_PORT: int = int(os.getenv("SMTP_PORT", 587))
+    SMTP_USERNAME: str = os.getenv("SMTP_USERNAME", "")
+    SMTP_PASSWORD: str = os.getenv("SMTP_PASSWORD", "")
+    SMTP_FROM_EMAIL: str = os.getenv("SMTP_FROM_EMAIL", "")
+    SMTP_USE_TLS: bool = os.getenv("SMTP_USE_TLS", "True").lower() in ("true", "1")
     
     # Suspicion Scoring Weights
     WEIGHT_FACE_NOT_DETECTED: int = int(os.getenv("WEIGHT_FACE_NOT_DETECTED", 20))
@@ -57,7 +79,7 @@ class Settings(BaseModel):
     YOLO_MODEL_PATH: str = os.getenv("YOLO_MODEL_PATH", "yolov8n.pt")
     
     # Demo/Test Mode
-    DEMO_MODE_ENABLED: bool = os.getenv("DEMO_MODE_ENABLED", "True").lower() in ("true", "1")
+    DEMO_MODE_ENABLED: bool = os.getenv("DEMO_MODE_ENABLED", "False").lower() in ("true", "1")
 
     # Admin Registration
     ADMIN_INVITE_CODE: str = os.getenv("ADMIN_INVITE_CODE", "PROCTOR-ADMIN-2026")
@@ -66,6 +88,46 @@ class Settings(BaseModel):
         case_sensitive = True
 
 settings = Settings()
+
+# --- Production startup guards ---
+# These warnings help operators catch misconfiguration before it reaches users.
+# They never crash the process — only log at WARNING level.
+import logging as _logging
+_guard_log = _logging.getLogger("smart_proctor.config")
+
+_DEFAULT_JWT_SECRET = "smart_proctoring_super_secret_jwt_key_2026_change_in_production"
+if settings.JWT_SECRET_KEY == _DEFAULT_JWT_SECRET:
+    _guard_log.warning(
+        "JWT_SECRET_KEY is still the hardcoded default. "
+        "Set a strong random secret via the JWT_SECRET_KEY environment variable for production."
+    )
+if settings.DEBUG:
+    _guard_log.warning("DEBUG=True — stack traces and debug information may be exposed to clients.")
+if settings.DEMO_MODE_ENABLED:
+    _guard_log.warning("DEMO_MODE_ENABLED=True — synthetic proctoring events are enabled. Disable for production.")
+if settings.OTP_PROVIDER == "console":
+    _guard_log.warning(
+        "OTP_PROVIDER=console — OTP codes will NOT be delivered. "
+        "Set OTP_PROVIDER=smtp and configure SMTP_* environment variables for production."
+    )
+if settings.ADMIN_INVITE_CODE == "PROCTOR-ADMIN-2026":
+    _guard_log.warning(
+        "ADMIN_INVITE_CODE is still the hardcoded default. "
+        "Set a unique ADMIN_INVITE_CODE environment variable for production."
+    )
+if settings.DEV_ECHO_OTP:
+    _guard_log.warning(
+        "DEV_ECHO_OTP=True — plaintext OTP codes will be echoed to server logs. "
+        "This must NEVER be enabled in production."
+    )
+if not settings.DEBUG:
+    for origin in settings.CORS_ORIGINS:
+        if "localhost" in origin or "127.0.0.1" in origin:
+            _guard_log.warning(
+                f"CORS_ORIGINS contains '{origin}' while DEBUG=False. "
+                "This may allow unintended localhost access in production."
+            )
+            break
 
 # Ensure directories exist
 os.makedirs(settings.EVIDENCE_DIR, exist_ok=True)

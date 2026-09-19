@@ -22,6 +22,36 @@ class AdminRegisterRequest(BaseModel):
     invite_code: str
     subject: Optional[str] = "All Subjects"
 
+class OtpRequestRequest(BaseModel):
+    email: str
+    purpose: str = "login"  # login | registration
+
+class OtpVerifyRequest(BaseModel):
+    email: str
+    otp: str
+    purpose: str = "login"
+
+class OtpResponse(BaseModel):
+    message: str
+    expires_in_seconds: Optional[int] = None
+    # Never contains the OTP itself in production.
+
+class LoginChallengeResponse(BaseModel):
+    """Returned after valid credentials; carries no JWT and no OTP.
+
+    ``challenge_token`` is a short-lived, signed, non-sensitive identifier that
+    binds the subsequent OTP verification to the *registered* account email, so
+    the client cannot swap in an arbitrary email at the verify step.
+    """
+    message: str = "A verification code has been sent to your registered email"
+    challenge_token: str
+    email: str  # masked/registered email for display only
+    expires_in_seconds: int
+
+class LoginOtpVerifyRequest(BaseModel):
+    challenge_token: str
+    otp: str
+
 class TokenResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"

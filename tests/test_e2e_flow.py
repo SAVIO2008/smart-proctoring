@@ -11,15 +11,48 @@ import cv2
 
 client = TestClient(app)
 
+
+def _login(client, email, password):
+    """Drive the full two-step OTP login and return (token, headers, user).
+
+    Clears any stale OTP record for this email first to avoid cooldown from
+    other test modules that used the same seeded account.
+    """
+    from backend.config.db import get_sessions_col
+    from backend.services import otp_service as otp_mod
+
+    # Clear any existing OTP record so the cooldown does not block this test.
+    get_sessions_col().delete_one({"_id": f"otp:login:{email.lower().strip()}"})
+
+    captured = {}
+    original = otp_mod.get_otp_provider
+
+    class _Cap:
+        def send(self, email, otp, purpose):
+            captured["otp"] = otp
+
+    otp_mod.get_otp_provider = lambda: _Cap()
+    try:
+        challenge = client.post("/api/auth/login", json={"email": email, "password": password})
+    finally:
+        otp_mod.get_otp_provider = original
+
+    assert challenge.status_code == 200, challenge.text
+    ct = challenge.json()["challenge_token"]
+    otp_val = captured["otp"]
+
+    verify = client.post("/api/auth/login/verify", json={"challenge_token": ct, "otp": otp_val})
+    assert verify.status_code == 200, verify.text
+    data = verify.json()
+    token = data["access_token"]
+    return token, {"Authorization": f"Bearer {token}"}, data["user"]
+
 def test_full_system_flow(monkeypatch):
     from backend.routes import proctoring
     monkeypatch.setattr(proctoring.face_detector, "detect_faces", lambda img: [{"bbox": [200, 100, 440, 380], "confidence": 0.95, "landmarks": []}])
 
     print('\n--- 1. Login Student ---')
-    res = client.post('/api/auth/login', json={'email': 'student@proctor.edu', 'password': 'Student@123'})
-    assert res.status_code == 200, f'Login failed: {res.text}'
-    token = res.json()['access_token']
-    headers = {'Authorization': f'Bearer {token}'}
+    token, headers, user = _login(client, 'student@proctor.edu', 'Student@123')
 
     print('\n--- 2. Fetch Exams ---')
     res = client.get('/api/exams', headers=headers)
@@ -74,10 +107,7 @@ def test_full_system_flow(monkeypatch):
     assert res.status_code == 200
 
     print('\n--- 10. Admin Dashboard & Reports ---')
-    res_admin = client.post('/api/auth/login', json={'email': 'admin@proctor.edu', 'password': 'Admin@123'})
-    assert res_admin.status_code == 200
-    admin_token = res_admin.json()['access_token']
-    admin_headers = {'Authorization': f'Bearer {admin_token}'}
+    admin_token, admin_headers, _ = _login(client, 'admin@proctor.edu', 'Admin@123')
 
     # Test Admin Dashboard
     res_dash = client.get('/api/admin/dashboard', headers=admin_headers)

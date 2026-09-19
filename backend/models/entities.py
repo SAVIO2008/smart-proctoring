@@ -4,6 +4,7 @@ from datetime import datetime
 
 class RoleEnum(str):
     STUDENT = "student"
+    PROFESSOR = "professor"
     ADMIN = "admin"
 
 class EventTypeEnum(str):

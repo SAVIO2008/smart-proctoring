@@ -5,6 +5,7 @@ import { Shield, User, LogOut, LayoutDashboard, MonitorPlay, FileText, CheckCirc
 export default function Navbar({ currentRoute, setCurrentRoute }) {
   const user = auth.getUser();
   const isAdmin = auth.isAdmin();
+  const isFaculty = auth.isAdmin() || auth.isProfessor();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
@@ -23,7 +24,7 @@ export default function Navbar({ currentRoute, setCurrentRoute }) {
 
   return (
     <>
-      <nav style={{
+      <nav className="app-navbar" style={{
         backgroundColor: 'var(--bg-secondary)',
         borderBottom: '1px solid var(--border-color)',
         padding: '0.75rem 2rem',
@@ -36,7 +37,7 @@ export default function Navbar({ currentRoute, setCurrentRoute }) {
       }}>
         {/* Brand */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer' }}
-             onClick={() => setCurrentRoute(isAdmin ? 'admin-dashboard' : 'student-dashboard')}>
+             onClick={() => setCurrentRoute(isFaculty ? 'admin-dashboard' : 'student-dashboard')}>
           <div style={{
             backgroundColor: 'rgba(59, 130, 246, 0.15)',
             padding: '0.45rem',
@@ -60,8 +61,8 @@ export default function Navbar({ currentRoute, setCurrentRoute }) {
         </div>
 
         {/* Nav Links */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          {isAdmin ? (
+        <div className="app-navbar-links" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          {isFaculty ? (
             <>
               <button
                 className={`btn btn-sm ${currentRoute === 'admin-dashboard' ? 'btn-primary' : 'btn-secondary'}`}
@@ -107,7 +108,7 @@ export default function Navbar({ currentRoute, setCurrentRoute }) {
         </div>
 
         {/* User profile & actions */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+        <div className="app-navbar-actions" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
           <div
             onClick={() => setCurrentRoute('profile')}
             title="Click to edit your profile and settings"
@@ -127,7 +128,7 @@ export default function Navbar({ currentRoute, setCurrentRoute }) {
             <div>
               <div style={{ fontSize: '0.875rem', fontWeight: 600 }}>{user.name}</div>
               <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-                {isAdmin ? (user.subject && user.subject !== 'All Subjects' ? `ADMIN • ${user.subject.toUpperCase()}` : 'CHIEF PROCTOR') : `STUDENT • ${user.student_id || 'STU'}`}
+                {isFaculty ? (user.subject && user.subject !== 'All Subjects' ? `${isAdmin ? 'ADMIN' : 'PROFESSOR'} • ${user.subject.toUpperCase()}` : (isAdmin ? 'CHIEF PROCTOR' : 'PROFESSOR')) : `STUDENT • ${user.student_id || 'STU'}`}
               </div>
             </div>
             {user.face_reference ? (

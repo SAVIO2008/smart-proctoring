@@ -27,8 +27,25 @@ export const auth = {
     return user?.role === 'admin';
   },
 
+  isProfessor() {
+    const user = this.getUser();
+    return user?.role === 'professor';
+  },
+
+  isAdminOrProfessor() {
+    const user = this.getUser();
+    return user?.role === 'admin' || user?.role === 'professor';
+  },
+
   async login(email, password) {
-    const res = await api.post('/auth/login', { email, password });
+    // Phase 1: credential validation returns an OTP challenge (no JWT yet).
+    const challenge = await api.post('/auth/login', { email, password });
+    return challenge;
+  },
+
+  async verifyLoginOtp(challengeToken, otp) {
+    // Phase 2: verify the emailed OTP and establish the authenticated session.
+    const res = await api.post('/auth/login/verify', { challenge_token: challengeToken, otp });
     api.setToken(res.access_token);
     this.setUser(res.user);
     return res.user;
@@ -64,6 +81,13 @@ export const auth = {
   },
 
   logout() {
+    // Best-effort server-side session revocation (the JWT's jti is invalidated).
+    // Even if the network call fails, we clear local state so the user is logged out.
+    try {
+      api.post('/auth/logout', {}).catch(() => {});
+    } catch (_) {
+      // ignore
+    }
     api.setToken(null);
     this.setUser(null);
     window.location.href = '/login';

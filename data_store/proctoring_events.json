@@ -61250,5 +61250,490 @@
     "status": "REVIEW",
     "_id": "6d694c52-3439-4644-bae7-4fc3ea186a39",
     "created_at": "2026-09-10T17:27:24.996214"
+  },
+  {
+    "attempt_id": "ef7c9801-2727-456d-9eef-23443d74d0ad",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "d6851a5e-36ab-4664-a28a-11b04e48c2c6",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-18T13:46:58.002841",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260918_134658_4cd7b8.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "e04feb04-aad7-4d6a-9f5c-3e5ca5a6ee33",
+    "created_at": "2026-09-18T13:46:58.002893+00:00"
+  },
+  {
+    "attempt_id": "6ac59a40-230b-4a5b-a47e-0f1ceb13e9bf",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "d6851a5e-36ab-4664-a28a-11b04e48c2c6",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-18T14:06:22.091017",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260918_140622_4f044f.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "be2dd757-05a2-4eb2-9f02-83233f8fb28d",
+    "created_at": "2026-09-18T14:06:22.091055+00:00"
+  },
+  {
+    "attempt_id": "0c8847bf-7912-46d9-a934-cc14fac71c2f",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "d6851a5e-36ab-4664-a28a-11b04e48c2c6",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-18T14:51:50.307434",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260918_145150_a4dfdc.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "81451ffd-47d4-4d09-8b63-75b8a5fe9e36",
+    "created_at": "2026-09-18T14:51:50.307528+00:00"
+  },
+  {
+    "attempt_id": "b414a4e2-717e-4c7e-95e5-c3a56d43e918",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "d6851a5e-36ab-4664-a28a-11b04e48c2c6",
+    "event_type": "AUDIO_ACTIVITY_DETECTED",
+    "timestamp": "2026-09-18T14:58:10.760831",
+    "confidence": 0.8,
+    "suspicion_points": 20,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_d6851a5e-36ab-4664-a28a-11b04e48c2c6_AUDIO_ACTIVITY_DETECTED_20260918_145810_92bbf7.jpg",
+    "metadata": {
+      "energy_level": 0.047
+    },
+    "is_demo": false,
+    "status": "REVIEW",
+    "_id": "534838f5-95d2-4ad5-8777-4b094e44bb38",
+    "created_at": "2026-09-18T14:58:10.760978+00:00"
+  },
+  {
+    "attempt_id": "b414a4e2-717e-4c7e-95e5-c3a56d43e918",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "d6851a5e-36ab-4664-a28a-11b04e48c2c6",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-18T14:58:11.270337",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260918_145811_b2ab72.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "cda17ae4-e010-4899-babc-e57e18dabef6",
+    "created_at": "2026-09-18T14:58:11.270465+00:00"
+  },
+  {
+    "attempt_id": "8822a1a7-40a5-437c-bfc2-bc8e709ced25",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "d6851a5e-36ab-4664-a28a-11b04e48c2c6",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-18T15:01:56.060866",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260918_150156_c878d2.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "9ed5472f-7d31-4b7b-a224-44e933edf795",
+    "created_at": "2026-09-18T15:01:56.060922+00:00"
+  },
+  {
+    "attempt_id": "72bbd654-baca-444f-8278-7fe0bf9b8676",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "d6851a5e-36ab-4664-a28a-11b04e48c2c6",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-18T15:21:13.638014",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260918_152113_ccc008.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "15ae48f5-b034-4bb3-85ce-19e5dd5c68ee",
+    "created_at": "2026-09-18T15:21:13.638054+00:00"
+  },
+  {
+    "attempt_id": "ce0ca436-93be-46ba-bff5-4caf885aff52",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "d6851a5e-36ab-4664-a28a-11b04e48c2c6",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-18T15:23:24.009639",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260918_152324_1af364.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "56c88e10-9dd8-46ee-98fa-7be12e9c8d02",
+    "created_at": "2026-09-18T15:23:24.009676+00:00"
+  },
+  {
+    "attempt_id": "aeceb831-bdaf-490f-8b83-925a35966ca0",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "467712dd-3886-4129-949c-a7d0732e3830",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-18T15:23:45.738775",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260918_152345_fbd09e.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "fc8eae2f-776c-4007-8dc8-baadf268ab40",
+    "created_at": "2026-09-18T15:23:45.738825+00:00"
+  },
+  {
+    "attempt_id": "5a4951f6-9e98-46e1-8d1b-fba460644171",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "d6851a5e-36ab-4664-a28a-11b04e48c2c6",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-18T15:25:25.908554",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260918_152525_7f2a2c.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "feadfc0d-7c79-4fa1-a006-aab84fad9c9d",
+    "created_at": "2026-09-18T15:25:25.908598+00:00"
+  },
+  {
+    "attempt_id": "e9fb5876-58e6-4c7c-8982-d4f8e27210ab",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "467712dd-3886-4129-949c-a7d0732e3830",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-18T15:25:39.968057",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260918_152539_343b36.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "477507c7-4f94-4da8-9997-e67e0e050ab0",
+    "created_at": "2026-09-18T15:25:39.968168+00:00"
+  },
+  {
+    "attempt_id": "d9732d34-d3e0-4b19-b8b6-44d2d0f21e67",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "d6851a5e-36ab-4664-a28a-11b04e48c2c6",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-19T09:25:29.378761",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260919_092529_531935.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "ec95a23a-b5ae-451d-9901-15330e5f0102",
+    "created_at": "2026-09-19T09:25:29.378807+00:00"
+  },
+  {
+    "attempt_id": "5f660fcb-f36a-42bb-9f96-4e1ceb5ef470",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "467712dd-3886-4129-949c-a7d0732e3830",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-19T09:25:41.367334",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260919_092541_edd36c.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "d61cc6f9-1f7b-469f-a9e8-74e47f8644a0",
+    "created_at": "2026-09-19T09:25:41.367411+00:00"
+  },
+  {
+    "attempt_id": "eab782d9-6e7e-426d-b72c-4aadb1a3496b",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "d6851a5e-36ab-4664-a28a-11b04e48c2c6",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-19T09:30:24.734461",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260919_093024_304332.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "97d92a30-103a-450a-a8b5-2b2e521e24db",
+    "created_at": "2026-09-19T09:30:24.734506+00:00"
+  },
+  {
+    "attempt_id": "50ed3a19-bc77-4acd-a9bf-4b584048e30e",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "467712dd-3886-4129-949c-a7d0732e3830",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-19T09:30:35.806202",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260919_093035_270fe1.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "49eb2662-156d-486d-8ca8-8ea59a1232e0",
+    "created_at": "2026-09-19T09:30:35.806253+00:00"
+  },
+  {
+    "attempt_id": "1de38ec4-bd67-43a9-bfe9-d1e11eb03e3f",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "d6851a5e-36ab-4664-a28a-11b04e48c2c6",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-19T09:52:49.336930",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260919_095249_307172.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "bf0f7d58-aecb-4aff-b6f7-395d66c8043e",
+    "created_at": "2026-09-19T09:52:49.336980+00:00"
+  },
+  {
+    "attempt_id": "c05c2cdb-22cc-4ea7-837a-0202af76869a",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "467712dd-3886-4129-949c-a7d0732e3830",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-19T09:53:18.846699",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260919_095318_d50e2d.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "0aa9c580-3fe5-44dc-8ddb-f27f0d3c369a",
+    "created_at": "2026-09-19T09:53:18.846747+00:00"
+  },
+  {
+    "attempt_id": "6f593df4-1d95-4383-8ff6-4ebea4b4345b",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "d6851a5e-36ab-4664-a28a-11b04e48c2c6",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-19T10:50:27.860701",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260919_105027_3f2c97.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "99382af1-1956-473f-947a-b48b5028085e",
+    "created_at": "2026-09-19T10:50:27.860743+00:00"
+  },
+  {
+    "attempt_id": "2da6db90-ffab-4d50-87c3-3ac5a38a9366",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "467712dd-3886-4129-949c-a7d0732e3830",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-19T10:50:53.183321",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260919_105053_ab6657.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "4e4743d1-9aec-4c3e-9b7b-2f653fb3e227",
+    "created_at": "2026-09-19T10:50:53.183364+00:00"
+  },
+  {
+    "attempt_id": "6e0d4c99-4b65-406b-967e-65dd6d9c4827",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "d6851a5e-36ab-4664-a28a-11b04e48c2c6",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-19T10:53:24.016611",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260919_105324_462a2e.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "88518cd0-1618-4b14-b921-4446a2825d66",
+    "created_at": "2026-09-19T10:53:24.016697+00:00"
+  },
+  {
+    "attempt_id": "2e601dee-99fb-4468-a344-be84c24c14be",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "467712dd-3886-4129-949c-a7d0732e3830",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-19T10:53:38.510791",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260919_105338_f5264a.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "f2242b8b-8081-40fd-8456-7c23c4486cf7",
+    "created_at": "2026-09-19T10:53:38.510907+00:00"
+  },
+  {
+    "attempt_id": "db82c9ee-5d5b-4780-8ef7-efdaf3402db4",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "d6851a5e-36ab-4664-a28a-11b04e48c2c6",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-19T11:00:34.673003",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260919_110034_b49aa9.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "be53301e-ae87-455a-ad23-0e342177fc11",
+    "created_at": "2026-09-19T11:00:34.673044+00:00"
+  },
+  {
+    "attempt_id": "6e93e5fe-99f3-4ece-ad66-8a710ebf8da8",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "467712dd-3886-4129-949c-a7d0732e3830",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-19T11:00:47.995096",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260919_110047_126dd0.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "bd3ddfdf-68f6-4f99-9ebf-c49257bc8af0",
+    "created_at": "2026-09-19T11:00:47.995142+00:00"
+  },
+  {
+    "attempt_id": "60b95d28-dbed-42b5-990b-0e3132b7288e",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "d6851a5e-36ab-4664-a28a-11b04e48c2c6",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-19T11:04:49.580046",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260919_110449_50d6cb.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "42d3011b-5fd6-46fc-b15f-c5c7e90cb52a",
+    "created_at": "2026-09-19T11:04:49.580094+00:00"
+  },
+  {
+    "attempt_id": "8d322440-f564-440d-b08c-965da2a4737f",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "467712dd-3886-4129-949c-a7d0732e3830",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-19T11:05:04.216861",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260919_110504_e78bc2.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "3a738506-44b4-4f7a-8a03-41d84193deab",
+    "created_at": "2026-09-19T11:05:04.216925+00:00"
+  },
+  {
+    "attempt_id": "dbc703f7-f9a8-494a-a121-3dd2dfc9ab30",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "d6851a5e-36ab-4664-a28a-11b04e48c2c6",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-19T11:24:55.909370",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260919_112455_960cba.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "5ac72a17-3c9d-4cc6-b0cb-5bc88caf5d04",
+    "created_at": "2026-09-19T11:24:55.909406+00:00"
+  },
+  {
+    "attempt_id": "32ed471b-949c-4826-a1c9-074f4a18598a",
+    "student_id": "a1eea2e3-f581-4070-a1f7-0af94122933a",
+    "exam_id": "467712dd-3886-4129-949c-a7d0732e3830",
+    "event_type": "MOBILE_PHONE_DETECTED",
+    "timestamp": "2026-09-19T11:25:07.737527",
+    "confidence": 0.95,
+    "suspicion_points": 50,
+    "evidence_image": "/evidence/a1eea2e3-f581-4070-a1f7-0af94122933a_demo_exam_DEMO_MOBILE_PHONE_DETECTED_20260919_112507_113ad9.jpg",
+    "metadata": {
+      "simulation": true,
+      "demo_note": "Triggered via Viva Presentation Panel"
+    },
+    "is_demo": true,
+    "status": "REVIEW",
+    "_id": "00b8dfa3-45ca-487c-8c64-dca8926693ba",
+    "created_at": "2026-09-19T11:25:07.737575+00:00"
   }
 ]

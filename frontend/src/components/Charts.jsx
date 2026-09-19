@@ -75,7 +75,7 @@ export function IncidentBreakdownChart({ data = {} }) {
       },
       y: {
         beginAtZero: true,
-        ticks: { color: '#94a3b8', stepSize: 1 },
+        ticks: { color: '#94a3b8', maxTicksLimit: 6 },
         grid: { color: 'rgba(51, 65, 85, 0.4)' }
       }
     }

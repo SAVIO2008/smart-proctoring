@@ -17,8 +17,10 @@ import ProfileEditor from './pages/ProfileEditor';
 
 export default function App() {
   const [currentUser, setCurrentUser] = useState(auth.getUser());
+  // Faculty = admin or professor; both land on the faculty dashboard.
+  const isFaculty = currentUser && (currentUser.role === 'admin' || currentUser.role === 'professor');
   const [currentRoute, setCurrentRoute] = useState(
-    currentUser ? (currentUser.role === 'admin' ? 'admin-dashboard' : 'student-dashboard') : 'login'
+    currentUser ? (isFaculty ? 'admin-dashboard' : 'student-dashboard') : 'login'
   );
   
   // Examination flow state
@@ -36,7 +38,7 @@ export default function App() {
 
   const handleLoginSuccess = (user) => {
     setCurrentUser(user);
-    if (user.role === 'admin') {
+    if (user.role === 'admin' || user.role === 'professor') {
       setCurrentRoute('admin-dashboard');
     } else {
       setCurrentRoute('student-dashboard');
@@ -115,7 +117,7 @@ export default function App() {
       case 'profile':
         return (
           <ProfileEditor
-            onBack={() => setCurrentRoute(currentUser.role === 'admin' ? 'admin-dashboard' : 'student-dashboard')}
+            onBack={() => setCurrentRoute(isFaculty ? 'admin-dashboard' : 'student-dashboard')}
             onUserUpdated={handleUserUpdated}
           />
         );
@@ -181,7 +183,7 @@ export default function App() {
         return (
           <AdminReportView
             attemptId={activeAttemptId}
-            onBack={() => setCurrentRoute(currentUser.role === 'admin' ? 'admin-dashboard' : 'student-dashboard')}
+            onBack={() => setCurrentRoute(isFaculty ? 'admin-dashboard' : 'student-dashboard')}
           />
         );
 

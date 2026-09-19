@@ -1,6 +1,7 @@
+import secrets
 import bcrypt
 import jwt
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional, Dict, Any
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
@@ -8,6 +9,21 @@ from backend.config.settings import settings
 from backend.config.db import get_users_col
 
 security_bearer = HTTPBearer(auto_error=False)
+
+# In-memory revocation registry shared per-process. Session lifecycle helpers live in
+# services/session_store.py and write to persistent storage so revocation survives restarts.
+_revocation_registry: Dict[str, Any] = {"revoked": set()}
+
+
+def _get_revocation_store() -> Dict[str, Any]:
+    """Merge the persistent session store with the in-process cache."""
+    from backend.services.session_store import session_store
+    return {"revoked": session_store.get_revoked_jtis()}
+
+
+def _utcnow() -> datetime:
+    return datetime.now(timezone.utc)
+
 
 def hash_password(password: str) -> str:
     salt = bcrypt.gensalt(rounds=12)
@@ -22,7 +38,9 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 
 def create_access_token(data: Dict[str, Any], expires_delta: Optional[timedelta] = None) -> str:
     to_encode = data.copy()
-    expire = datetime.utcnow() + (expires_delta or timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES))
+    expire = _utcnow() + (expires_delta or timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES))
+    # A globally-unique token id enables logout/session revocation.
+    to_encode.setdefault("jti", secrets.token_urlsafe(16))
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, settings.JWT_SECRET_KEY, algorithm=settings.JWT_ALGORITHM)
     return encoded_jwt
@@ -59,6 +77,14 @@ async def get_current_user(credentials: Optional[HTTPAuthorizationCredentials] =
             detail="User associated with token no longer exists",
             headers={"WWW-Authenticate": "Bearer"}
         )
+    # Enforce server-side session revocation (logout) and token rotation.
+    token_stores = _get_revocation_store()
+    if payload.get("jti") in token_stores["revoked"]:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Session has been revoked",
+            headers={"WWW-Authenticate": "Bearer"}
+        )
     return user
 
 async def get_current_admin(current_user: Dict[str, Any] = Depends(get_current_user)) -> Dict[str, Any]:
@@ -66,5 +92,14 @@ async def get_current_admin(current_user: Dict[str, Any] = Depends(get_current_u
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Access restricted to administrative accounts"
+        )
+    return current_user
+
+async def get_current_professor(current_user: Dict[str, Any] = Depends(get_current_user)) -> Dict[str, Any]:
+    """Allows professors and administrators to access professor-scoped routes."""
+    if current_user.get("role") not in ("professor", "admin"):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Access restricted to professor and administrative accounts"
         )
     return current_user

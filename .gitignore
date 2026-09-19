@@ -9,6 +9,8 @@ evidence/*
 # 2. Environment Variables & Credentials
 .env
 *.local.env
+frontend/.env.production
+frontend/.env.local
 
 # 3. Python Virtual Environments & Packages
 .venv/
@@ -45,3 +47,33 @@ Thumbs.db
 *.pt
 models/weights/*.onnx
 !models/weights/.gitkeep
+
+# ==========================================
+# Local AI / development tooling
+# ==========================================
+
+# OpenCode
+.opencode/
+.opencode-agents-tokli/
+.opencode-agents-voidai-backup/
+opencode.json
+opencode.json.backup*
+AGENTS.md
+AGENTS.md.backup*
+
+# Other local AI/dev tooling
+.playwright-mcp/
+.serena/
+
+# Nested duplicate project
+Project-main/
+
+# Root Node dependencies
+node_modules/
+
+# Local test/debug artifacts
+agent-test.txt
+test-request.json
+tool-test.json
+test-routing.ps1
+ui-inspection*.png

@@ -81,6 +81,66 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
 }
 
+.app-navbar-links,
+.app-navbar-actions {
+  min-width: 0;
+}
+
+.admin-dashboard-actions {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.admin-dashboard-table {
+  max-width: 100%;
+}
+
+@media (max-width: 700px) {
+  .app-navbar {
+    padding: 0.75rem 1rem !important;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .app-navbar-links,
+  .app-navbar-actions {
+    flex: 1 1 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem !important;
+  }
+
+  .app-navbar-actions {
+    justify-content: space-between;
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+
+  .admin-dashboard-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .admin-dashboard-actions .btn {
+    flex: 1 1 auto;
+  }
+
+  .admin-dashboard-charts {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 1rem !important;
+  }
+
+  .admin-dashboard-table {
+    overflow-x: auto !important;
+  }
+
+  .admin-dashboard-table .data-table {
+    min-width: 760px;
+  }
+}
+
 /* Glassmorphism Card */
 .glass-card {
   background: var(--bg-surface);

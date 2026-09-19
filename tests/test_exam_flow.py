@@ -4,24 +4,61 @@ from backend.app import app
 
 client = TestClient(app)
 
-def test_student_exam_lifecycle():
-    # 1. Login as student
-    res_login = client.post("/api/auth/login", json={
-        "email": "student@proctor.edu",
-        "password": "Student@123"
-    })
-    token = res_login.json()["access_token"]
-    headers = {"Authorization": f"Bearer {token}"}
 
-    # 2. List exams
+def _login(client, email, password):
+    """Drive the full two-step OTP login and return (token, headers, user).
+
+    Clears any stale OTP record for this email first to avoid cooldown from
+    other test modules that used the same seeded account.
+    """
+    from backend.config.db import get_sessions_col
+    from backend.services import otp_service as otp_mod
+
+    # Clear any existing OTP record so the cooldown does not block this test.
+    get_sessions_col().delete_one({"_id": f"otp:login:{email.lower().strip()}"})
+
+    captured = {}
+    original = otp_mod.get_otp_provider
+
+    class _Cap:
+        def send(self, email, otp, purpose):
+            captured["otp"] = otp
+
+    otp_mod.get_otp_provider = lambda: _Cap()
+    try:
+        challenge = client.post("/api/auth/login", json={"email": email, "password": password})
+    finally:
+        otp_mod.get_otp_provider = original
+
+    assert challenge.status_code == 200, challenge.text
+    ct = challenge.json()["challenge_token"]
+    otp_val = captured["otp"]
+
+    verify = client.post("/api/auth/login/verify", json={"challenge_token": ct, "otp": otp_val})
+    assert verify.status_code == 200, verify.text
+    data = verify.json()
+    token = data["access_token"]
+    return token, {"Authorization": f"Bearer {token}"}, data["user"]
+
+def test_student_exam_lifecycle():
+    # 1. Login as student (two-step OTP).
+    token, headers, user = _login(client, "student@proctor.edu", "Student@123")
+
+    # 2. List exams (pick one with questions)
     res_exams = client.get("/api/exams", headers=headers)
     assert res_exams.status_code == 200
     exams = res_exams.json()
     assert len(exams) >= 1
-    exam_id = exams[0]["id"]
+    # Pick the first exam that has at least one question
+    exam_id = None
+    for e in exams:
+        if e.get("questions_count", 0) >= 1:
+            exam_id = e["id"]
+            break
+    assert exam_id is not None, "No exam with questions found"
 
     # 3. Start Exam Attempt
-    face_ref = res_login.json()["user"].get("face_reference")
+    face_ref = user.get("face_reference")
     res_start = client.post("/api/attempts/start", json={
         "exam_id": exam_id,
         "verified_face_reference": face_ref
@@ -49,12 +86,7 @@ def test_student_exam_lifecycle():
     assert "score" in res_data
 
 def test_system_check_and_frame_api():
-    res_login = client.post("/api/auth/login", json={
-        "email": "student@proctor.edu",
-        "password": "Student@123"
-    })
-    token = res_login.json()["access_token"]
-    headers = {"Authorization": f"Bearer {token}"}
+    token, headers, user = _login(client, "student@proctor.edu", "Student@123")
 
     # Synthetic test image (640x480 gray frame with circle)
     import cv2, base64, numpy as np

@@ -1,5 +1,7 @@
 // API Client with automatic JWT Token Injection
-const API_BASE_URL = '/api';
+// Uses VITE_API_BASE_URL in production (statically replaced at build time),
+// falls back to '/api' for development (Vite proxy) or same-origin deployments.
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
 
 class ApiClient {
   constructor() {
@@ -37,7 +39,7 @@ class ApiClient {
         headers,
       });
 
-      if (response.status === 401) {
+      if (response.status === 401 && endpoint !== '/auth/login' && endpoint !== '/auth/login/verify') {
         // If unauthorized, clear token
         this.setToken(null);
         if (!window.location.pathname.includes('/login') && !window.location.pathname.includes('/register')) {

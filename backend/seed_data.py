@@ -33,6 +33,18 @@ def seed_database():
         }
         users_col.insert_one(admin_user)
 
+        professor_user = {
+            "name": "Prof. Alan Turing",
+            "email": "professor@proctor.edu",
+            "password_hash": hash_password("Professor@123"),
+            "role": "professor",
+            "student_id": "PROF001",
+            "subject": "Computer Science",
+            "face_reference": None,
+            "created_at": datetime.utcnow().isoformat()
+        }
+        users_col.insert_one(professor_user)
+
         student_user = {
             "name": "Alex Mitchell",
             "email": "student@proctor.edu",

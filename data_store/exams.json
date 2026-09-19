@@ -61,5 +61,18 @@
     "status": "active",
     "created_at": "2026-09-10T15:14:28.258645",
     "_id": "467712dd-3886-4129-949c-a7d0732e3830"
+  },
+  {
+    "title": "IAI",
+    "subject_code": "AI & MACHINE LEARNING",
+    "category": "AI & Machine Learning",
+    "description": "module 1",
+    "duration_minutes": 30,
+    "total_marks": 100,
+    "passing_marks": 40,
+    "created_by": "4432ef59-3164-4c3f-8753-2858a9ab5889",
+    "status": "active",
+    "created_at": "2026-09-17T12:31:55.739201",
+    "_id": "d6851a5e-36ab-4664-a28a-11b04e48c2c6"
   }
 ]
