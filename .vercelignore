@@ -1,0 +1,49 @@
+# Vercel deployment exclusions — prevent bundling local dev artifacts
+# These files exist locally but must NOT be included in the Vercel deployment bundle.
+
+# Python virtual environment (local only)
+.venv/
+
+# Duplicate project directory
+Project-main/
+
+# OpenCode agent sessions and configs
+.opencode/
+.opencode-agents-tokli/
+.opencode-agents-voidai-backup/
+
+# Local AI/dev tooling
+.playwright-mcp/
+.serena/
+.impeccable/
+
+# Runtime-generated evidence images (not needed at deploy time)
+evidence/
+
+# Test suite (not needed in production)
+tests/
+
+# Training scripts and datasets (not needed in production)
+training/
+
+# Utility scripts (not needed in production)
+scripts/
+
+# Python bytecode cache
+__pycache__/
+
+# Pytest cache
+.pytest_cache/
+
+# Node modules (frontend is pre-built into dist/)
+node_modules/
+frontend/node_modules/
+
+# Model weight files at root (YOLO weights auto-downloaded by ultralytics at runtime)
+*.pt
+
+# Model downloader utility (dev-only script)
+models/download_models.py
+
+# Model weights (ONNX files) — downloaded at build time or runtime
+models/weights/*.onnx
