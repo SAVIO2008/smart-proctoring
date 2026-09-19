@@ -129,6 +129,17 @@ if not settings.DEBUG:
             )
             break
 
-# Ensure directories exist
-os.makedirs(settings.EVIDENCE_DIR, exist_ok=True)
-os.makedirs(settings.MODELS_DIR, exist_ok=True)
+# Ensure directories exist.
+# On read-only filesystems (e.g. Vercel serverless runtime), fall back to /tmp.
+def _ensure_dir(path: str) -> str:
+    """Create a directory.  If the filesystem is read-only, relocate under /tmp."""
+    try:
+        os.makedirs(path, exist_ok=True)
+        return path
+    except OSError:
+        _fallback = os.path.join("/tmp", os.path.basename(path) or "app_data")
+        os.makedirs(_fallback, exist_ok=True)
+        return _fallback
+
+settings.EVIDENCE_DIR = _ensure_dir(settings.EVIDENCE_DIR)       # type: ignore[assignment]
+settings.MODELS_DIR = _ensure_dir(settings.MODELS_DIR)           # type: ignore[assignment]

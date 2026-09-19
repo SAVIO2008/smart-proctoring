@@ -44,7 +44,9 @@ Thumbs.db
 *.swo
 
 # 6. Large Model Weights (Optional - auto-downloaded via models/download_models.py)
+# yolov8n.pt (~6.25 MB) is required at runtime and must be bundled in production.
 *.pt
+!yolov8n.pt
 models/weights/*.onnx
 !models/weights/.gitkeep
 

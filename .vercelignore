@@ -39,8 +39,11 @@ __pycache__/
 node_modules/
 frontend/node_modules/
 
-# Model weight files at root (YOLO weights auto-downloaded by ultralytics at runtime)
+# Model weight files at root.
+# yolov8n.pt is required at runtime — it is small (6.25 MB) and must be bundled.
+# Other .pt files (e.g. training checkpoints) are excluded.
 *.pt
+!yolov8n.pt
 
 # Model downloader utility (dev-only script)
 models/download_models.py
