@@ -5,7 +5,7 @@ requires-python = ">=3.11,<3.13"
 dependencies = [
     # Web Framework & API
     "fastapi>=0.109.0",
-    "uvicorn[standard]>=0.27.0",
+    "uvicorn>=0.27.0",
     "pydantic>=2.6.0",
     "python-multipart>=0.0.9",
     "python-dotenv>=1.0.1",
@@ -16,6 +16,8 @@ dependencies = [
     # Database
     "pymongo>=4.6.1",
     # Computer Vision & Machine Learning
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
     "opencv-python-headless>=4.9.0.80",
     "mediapipe>=0.10.9",
     "numpy>=1.24.3",
@@ -28,6 +30,15 @@ dev = [
     "pytest>=8.0.0",
     "pytest-asyncio>=0.23.5",
 ]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+torchvision = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
 
 [tool.vercel]
 entrypoint = "backend.app:app"
