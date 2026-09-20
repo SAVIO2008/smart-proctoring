@@ -17,6 +17,14 @@ setup_logging()
 # Log active OTP provider configuration at startup
 _log_provider_startup()
 
+# --- TLS Diagnostic (temporary — remove after Vercel diagnosis) ---
+try:
+    from backend.utils.tls_diag import _run_tls_diagnostics
+    _run_tls_diagnostics()
+except Exception as diag_err:
+    logger.warning("TLS diagnostic failed (non-fatal): %s", diag_err)
+# --- End TLS Diagnostic ---
+
 # Initial database seed on load (only when using local storage)
 if settings.DATABASE_MODE == "local":
     try:
