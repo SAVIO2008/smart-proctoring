@@ -256,8 +256,15 @@ class DatabaseManager:
             )
 
         try:
+            # Use certifi's CA bundle explicitly. On serverless platforms
+            # (Vercel, AWS Lambda) the system CA certificates may be
+            # missing or incomplete, causing TLS handshake failures
+            # (TLSV1_ALERT_INTERNAL_ERROR) when connecting to MongoDB Atlas.
+            import certifi
+
             client = MongoClient(
                 settings.MONGODB_URI,
+                tlsCAFile=certifi.where(),
                 serverSelectionTimeoutMS=5000,
                 maxPoolSize=10,
                 minPoolSize=1,
