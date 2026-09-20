@@ -146,17 +146,17 @@ def get_me(current_user: Dict[str, Any] = Depends(get_current_user)):
 @router.put("/me", response_model=UserProfileUpdateResponse)
 def update_me(req: UserProfileUpdateRequest, current_user: Dict[str, Any] = Depends(get_current_user)):
     """Update profile details (name, student ID, subject domain, face baseline, password) for students & admins."""
-    return auth_service.update_user_profile(str(current_user["_id"]), req)
+    return auth_service.update_user_profile(current_user, req)
 
 @router.patch("/me", response_model=UserProfileUpdateResponse)
 def patch_me(req: UserProfileUpdateRequest, current_user: Dict[str, Any] = Depends(get_current_user)):
     """Alias for updating profile details."""
-    return auth_service.update_user_profile(str(current_user["_id"]), req)
+    return auth_service.update_user_profile(current_user, req)
 
 @router.delete("/me")
 def delete_my_account(current_user: Dict[str, Any] = Depends(get_current_user)):
     """Permanently delete the logged in user's account and associated test sessions."""
-    return auth_service.delete_user_account(str(current_user["_id"]))
+    return auth_service.delete_user_account(current_user)
 
 
 @router.get("/smtp-check")

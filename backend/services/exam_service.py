@@ -248,7 +248,7 @@ class ExamService:
             if query_img is not None:
                 faces = face_detector.detect_faces(query_img)
                 if len(faces) == 1:
-                    users_col.update_one({"_id": str(user["_id"])}, {"$set": {"face_reference": verified_face}})
+                    users_col.update_one({"_id": user["_id"]}, {"$set": {"face_reference": verified_face}})
 
         # Check for active in-progress attempt
         existing_attempt = attempts_col.find_one({

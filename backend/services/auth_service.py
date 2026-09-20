@@ -264,19 +264,13 @@ class AuthService:
             session_store.revoke(jti)
         return {"message": "Successfully logged out"}
 
-    def update_user_profile(self, user_id: str, req: UserProfileUpdateRequest) -> Dict[str, Any]:
+    def update_user_profile(self, user: Dict[str, Any], req: UserProfileUpdateRequest) -> Dict[str, Any]:
         users_col = get_users_col()
-        user = users_col.find_one({"_id": user_id}) or users_col.find_one({"_id": str(user_id)})
-        if not user:
-            user = users_col.find_one({"email": user_id.lower().strip()}) or users_col.find_one({"student_id": user_id})
         
-        if not user:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail="User account not found"
-            )
-
-        target_id = str(user["_id"])
+        # Use the raw _id from the user document (works for both ObjectId and string).
+        raw_id = user["_id"]
+        target_id = str(raw_id)
+        user_email = user.get("email", "")
         updates: Dict[str, Any] = {}
 
         # 1. Update Name (supported for both student and admin)
@@ -325,11 +319,13 @@ class AuthService:
 
         # Apply updates to database if any
         if updates:
-            users_col.update_one({"_id": target_id}, {"$set": updates})
-            try:
-                users_col.update_one({"_id": user["_id"]}, {"$set": updates})
-            except Exception:
-                pass
+            users_col.update_one({"_id": raw_id}, {"$set": updates})
+            # Also try string version as a safety net for local storage.
+            if str(raw_id) != target_id:
+                try:
+                    users_col.update_one({"_id": target_id}, {"$set": updates})
+                except Exception:
+                    pass
 
             # Sync student name across exam attempts for data consistency
             if "name" in updates:
@@ -341,7 +337,7 @@ class AuthService:
                 )
 
         # Fetch fresh updated document
-        updated_user = users_col.find_one({"_id": target_id}) or users_col.find_one({"_id": user["_id"]}) or {**user, **updates}
+        updated_user = users_col.find_one({"_id": raw_id}) or users_col.find_one({"_id": target_id}) or {**user, **updates}
         user_subject = updated_user.get("subject") or ("All Subjects" if updated_user.get("role") in ("admin", "professor") else None)
 
         # Generate renewed JWT token with latest claims
@@ -369,29 +365,25 @@ class AuthService:
             }
         }
 
-    def delete_user_account(self, user_id: str) -> Dict[str, Any]:
+    def delete_user_account(self, user: Dict[str, Any]) -> Dict[str, Any]:
         users_col = get_users_col()
         from backend.config.db import get_attempts_col, get_events_col
         from backend.services.proctoring_service import proctoring_service
 
-        user = users_col.find_one({"_id": user_id}) or users_col.find_one({"_id": str(user_id)})
-        if not user:
-            user = users_col.find_one({"email": user_id.lower().strip()}) or users_col.find_one({"student_id": user_id})
+        # Use the raw _id from the user document (works for both ObjectId and string).
+        raw_id = user["_id"]
+        target_id = str(raw_id)
+        user_email = user.get("email", "")
+        user_name = user.get("name", "Unknown")
         
-        if not user:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail="User account not found"
-            )
-
-        target_id = str(user["_id"])
-        
-        # 1. Remove user document
-        users_col.delete_one({"_id": target_id})
-        try:
-            users_col.delete_one({"_id": user["_id"]})
-        except Exception:
-            pass
+        # 1. Remove user document — use raw _id for exact match (ObjectId or string).
+        users_col.delete_one({"_id": raw_id})
+        # Also try string version for safety (e.g. local JSON store).
+        if str(raw_id) != target_id:
+            try:
+                users_col.delete_one({"_id": target_id})
+            except Exception:
+                pass
 
         # 2. Clean up associated attempts, events, and live feeds
         attempts_col = get_attempts_col()
