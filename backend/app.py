@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import JSONResponse
 from backend.config.settings import settings
+from backend.config.db import db_manager
 from backend.utils.logger import setup_logging, logger
 from backend.seed_data import seed_database
 from backend.routes import auth, exams, attempts, proctoring, admin, demo
@@ -26,12 +27,18 @@ if settings.DATABASE_MODE == "local":
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info("Initializing Smart Proctoring Backend Engine via Lifespan...")
+    # Connect to database (fail-fast in production if MongoDB is unreachable)
+    db_manager.connect()
     if settings.DATABASE_MODE == "local":
         try:
             seed_database()
         except Exception as e:
             logger.error(f"Lifespan seeding notice: {e}")
     yield
+    # Cleanup
+    if db_manager.client:
+        db_manager.client.close()
+        logger.info("MongoDB connection closed.")
     logger.info("Smart Proctoring Backend Engine shutdown.")
 
 app = FastAPI(

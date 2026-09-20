@@ -214,16 +214,47 @@ class DatabaseManager:
         self.client = None
         self.db = None
         self._local_collections = {}
-        self._init_connection()
+        self._connected = False
+        # Connection is deferred — call connect() during app startup (lifespan).
 
-    def _init_connection(self):
+    def connect(self) -> None:
+        """Establish the database connection.
+
+        Must be called once during application startup (e.g. FastAPI lifespan).
+        In local mode this is a no-op.  In mongodb mode it connects to the
+        configured MONGODB_URI and raises RuntimeError on failure.
+        """
+        if self._connected:
+            return
+        self._connected = True
+
         db_mode = settings.DATABASE_MODE
+
+        # --- Secret-safe startup diagnostics ---
+        mongodb_uri_configured = bool(
+            os.getenv("MONGODB_URI") and os.getenv("MONGODB_URI", "").strip()
+        )
+        logger.info(
+            "Database startup — DATABASE_MODE=%s | MONGODB_URI configured=%s",
+            db_mode,
+            mongodb_uri_configured,
+        )
+
         if db_mode == "local":
             self.is_mongodb = False
             logger.info("DATABASE_MODE=local — using file-backed document storage (dev/demo only).")
             return
 
         # DATABASE_MODE=mongodb (production default)
+        if not mongodb_uri_configured:
+            logger.critical(
+                "DATABASE_MODE=mongodb but MONGODB_URI environment variable is NOT set. "
+                "Set MONGODB_URI to your MongoDB Atlas connection string."
+            )
+            raise RuntimeError(
+                "MongoDB connection failed: MONGODB_URI environment variable is not configured."
+            )
+
         try:
             client = MongoClient(
                 settings.MONGODB_URI,
@@ -236,15 +267,12 @@ class DatabaseManager:
             self.client = client
             self.db = client[settings.DATABASE_NAME]
             self.is_mongodb = True
-            logger.info("Successfully connected to MongoDB (DATABASE_MODE=mongodb).")
+            logger.info("MongoDB connection — SUCCESS (DATABASE_MODE=mongodb).")
         except Exception as e:
-            logger.critical(
-                f"DATABASE_MODE=mongodb but MongoDB is unreachable: {e}. "
-                "Set DATABASE_MODE=local for file-backed dev storage or fix MONGODB_URI."
-            )
+            logger.critical("MongoDB connection — FAILED.")
             raise RuntimeError(
-                f"MongoDB connection failed in production mode (DATABASE_MODE=mongodb). "
-                f"Error: {e}"
+                "MongoDB connection failed in production mode (DATABASE_MODE=mongodb). "
+                "Verify MONGODB_URI is correct and the cluster is reachable."
             ) from e
 
     def get_collection(self, collection_name: str):
