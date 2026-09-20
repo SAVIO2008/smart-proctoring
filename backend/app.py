@@ -78,17 +78,27 @@ app.include_router(proctoring.router, prefix=settings.API_PREFIX)
 app.include_router(admin.router, prefix=settings.API_PREFIX)
 app.include_router(demo.router, prefix=settings.API_PREFIX)
 
-@app.get("/")
-def root():
+@app.get("/health")
+def health_check():
     return {
-        "status": "online",
+        "status": "healthy",
         "system": settings.PROJECT_NAME,
         "version": settings.VERSION,
-        "api_docs": "/docs"
+        "api_docs": "/docs",
+        "demo_mode": settings.DEMO_MODE_ENABLED,
+        "database_mode": settings.DATABASE_MODE,
+        "scoring_weights": {
+            "FACE_NOT_DETECTED": settings.WEIGHT_FACE_NOT_DETECTED,
+            "MULTIPLE_PERSONS": settings.WEIGHT_MULTIPLE_PERSONS,
+            "MOBILE_PHONE": settings.WEIGHT_MOBILE_PHONE,
+            "SUSPICIOUS_HEAD_MOVEMENT": settings.WEIGHT_SUSPICIOUS_HEAD_MOVEMENT,
+            "AUDIO_ACTIVITY": settings.WEIGHT_AUDIO_ACTIVITY,
+            "STUDENT_ABSENT": settings.WEIGHT_STUDENT_ABSENT
+        }
     }
 
 @app.get("/api/health")
-def health_check():
+def api_health_check():
     return {
         "status": "healthy",
         "demo_mode": settings.DEMO_MODE_ENABLED,
