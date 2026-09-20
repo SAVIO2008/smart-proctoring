@@ -114,11 +114,37 @@ def api_health_check():
     }
 
 # In production, serve the frontend build as static files.
-# This mount must come AFTER all API routes and the /evidence mount.
+# Mounts and routes must come AFTER all API routes and the /evidence mount.
 if not settings.DEBUG:
     _frontend_dist = Path(__file__).parent.parent / "frontend" / "dist"
     if _frontend_dist.exists():
-        app.mount("/", StaticFiles(directory=str(_frontend_dist), html=True), name="frontend")
+        from fastapi.responses import FileResponse
+
+        # Mount /assets for static JS/CSS bundles.
+        _assets_dir = _frontend_dist / "assets"
+        if _assets_dir.exists():
+            app.mount("/assets", StaticFiles(directory=str(_assets_dir)), name="assets")
+
+        _index_html = _frontend_dist / "index.html"
+
+        # Serve index.html for the root path.
+        @app.get("/")
+        async def frontend_root():
+            return FileResponse(str(_index_html))
+
+        # SPA fallback: serve index.html for any client-side route
+        # (e.g. /login, /dashboard, /register) that doesn't match
+        # an API route or static asset registered above.
+        @app.get("/{full_path:path}")
+        async def spa_fallback(full_path: str):
+            # Don't intercept /api/, /docs, /openapi.json, /health paths
+            # (these are already handled by explicit routes above).
+            if full_path.startswith("api/") or full_path.startswith("docs") or full_path.startswith("openapi.json"):
+                return JSONResponse({"detail": "Not Found"}, status_code=404)
+            if _index_html.exists():
+                return FileResponse(str(_index_html))
+            return JSONResponse({"detail": "Not Found"}, status_code=404)
+
         logger.info(f"Production mode: serving frontend from {_frontend_dist}")
     else:
         logger.warning(
