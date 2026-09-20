@@ -46,8 +46,12 @@ class AuthService:
             "created_at": datetime.now(timezone.utc).isoformat()
         }
 
+        # Generate a string _id BEFORE insertion so that MongoDB stores
+        # it as-is (not as ObjectId). This ensures JWT sub claims always
+        # match find_one({"_id": ...}) queries in get_current_user.
+        import uuid as _uuid
+        user_doc["_id"] = str(_uuid.uuid4())
         res = users_col.insert_one(user_doc)
-        user_doc["_id"] = str(res.inserted_id)
         
         # Issue JWT
         token = create_access_token({

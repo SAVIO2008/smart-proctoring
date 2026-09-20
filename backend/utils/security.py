@@ -71,6 +71,10 @@ async def get_current_user(credentials: Optional[HTTPAuthorizationCredentials] =
     user_id = payload["sub"]
     users_col = get_users_col()
     user = users_col.find_one({"_id": user_id})
+    # Fallback: if _id lookup fails (e.g. ObjectId vs string mismatch for
+    # users created before the string-_id fix), try the email from the JWT.
+    if not user and "email" in payload:
+        user = users_col.find_one({"email": payload["email"]})
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
