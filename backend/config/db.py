@@ -5,55 +5,10 @@ import copy
 import threading
 from datetime import datetime, timezone
 
-# ---------------------------------------------------------------------------
-# OpenSSL 3.0+ workaround for serverless platforms (Vercel, AWS Lambda).
-#
-# MongoDB Atlas may require legacy TLS renegotiation support.  On OpenSSL
-# 3.0+ (the default on Amazon Linux 2), the handshake can fail with
-# TLSV1_ALERT_INTERNAL_ERROR unless UnsafeLegacyServerConnect is enabled.
-#
-# We write a minimal OpenSSL config to a temp file and set OPENSSL_CONF
-# *before* importing pymongo (which initialises the ssl module), so that
-# PyMongo's internal SSL context picks up the option.
-#
-# This does NOT disable certificate verification — it only relaxes the
-# renegotiation handshake requirement.
-# ---------------------------------------------------------------------------
-def _configure_openssl_legacy() -> None:
-    """Write an OpenSSL config enabling UnsafeLegacyServerConnect if needed."""
-    # Only attempt on Linux (serverless platforms).
-    if os.name != "posix":
-        return
-    # If OPENSSL_CONF is already set by the platform, don't override.
-    if "OPENSSL_CONF" in os.environ:
-        return
-    _conf_path = os.path.join(
-        os.environ.get("TMPDIR", "/tmp"), "openssl_legacy.cnf"
-    )
-    try:
-        with open(_conf_path, "w") as _f:
-            _f.write(
-                "openssl_conf = openssl_init\n"
-                "\n"
-                "[openssl_init]\n"
-                "ssl_conf = ssl_sect\n"
-                "\n"
-                "[ssl_sect]\n"
-                "system_default = system_default_sect\n"
-                "\n"
-                "[system_default_sect]\n"
-                "Options = UnsafeLegacyServerConnect\n"
-            )
-        os.environ["OPENSSL_CONF"] = _conf_path
-    except OSError:
-        pass  # read-only filesystem — skip workaround
-
-_configure_openssl_legacy()
-
-from pymongo import MongoClient  # noqa: E402
-from pymongo.errors import ConnectionFailure, ServerSelectionTimeoutError  # noqa: E402
-from backend.config.settings import settings  # noqa: E402
-import logging  # noqa: E402
+from pymongo import MongoClient
+from pymongo.errors import ConnectionFailure, ServerSelectionTimeoutError
+from backend.config.settings import settings
+import logging
 
 logger = logging.getLogger(__name__)
 
@@ -302,14 +257,6 @@ class DatabaseManager:
             )
 
         try:
-            # Use certifi's CA bundle explicitly. On serverless platforms
-            # (Vercel, AWS Lambda) the system CA certificates may be
-            # missing or incomplete, causing TLS handshake failures
-            # (TLSV1_ALERT_INTERNAL_ERROR) when connecting to MongoDB Atlas.
-            #
-            # The UnsafeLegacyServerConnect OpenSSL workaround is applied
-            # at module-import time (see _configure_openssl_legacy above)
-            # so that PyMongo's SSL context picks it up.
             import certifi
 
             client = MongoClient(

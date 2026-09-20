@@ -6,6 +6,82 @@ This script is safe to commit temporarily for Vercel deployment diagnostics.
 Remove after diagnosis.
 """
 import os, sys, ssl, socket, platform
+import tempfile
+
+
+def _openssl_legacy_config() -> str:
+    """Write a temporary OpenSSL config enabling UnsafeLegacyServerConnect.
+    Returns the path to the config file, or None on failure."""
+    try:
+        fd, path = tempfile.mkstemp(suffix=".cnf", prefix="openssl_legacy_")
+        with os.fdopen(fd, "w") as f:
+            f.write(
+                "openssl_conf = openssl_init\n"
+                "\n"
+                "[openssl_init]\n"
+                "ssl_conf = ssl_sect\n"
+                "\n"
+                "[ssl_sect]\n"
+                "system_default = system_default_sect\n"
+                "\n"
+                "[system_default_sect]\n"
+                "Options = UnsafeLegacyServerConnect\n"
+            )
+        return path
+    except OSError:
+        return None
+
+
+def _test_tls_handshake(
+    host: str,
+    port: int,
+    cafile: str,
+    description: str,
+    legacy_config: str | None = None,
+) -> str:
+    """Perform a raw TLS handshake and return a one-line result string.
+
+    If *legacy_config* is provided, OPENSSL_CONF is set to that path for
+    the duration of the test (and restored afterward).
+    """
+    saved_conf = os.environ.get("OPENSSL_CONF")
+    if legacy_config:
+        os.environ["OPENSSL_CONF"] = legacy_config
+
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(15)
+        sock.connect((host, port))
+
+        ctx = ssl.create_default_context(cafile=cafile)
+        ctx.check_hostname = True
+        ctx.verify_mode = ssl.CERT_REQUIRED
+        ctx.minimum_version = ssl.TLSVersion.TLSv1_2
+
+        tls_sock = ctx.wrap_socket(sock, server_hostname=host)
+        cipher = tls_sock.cipher()
+        version = tls_sock.version()
+        tls_sock.close()
+
+        result = f"  {description}: SUCCESS — {version} / {cipher[0] if cipher else 'N/A'}"
+    except ssl.SSLError as e:
+        err_msg = str(e).splitlines()[0] if str(e) else type(e).__name__
+        result = f"  {description}: FAILED — {type(e).__name__}: {err_msg[:120]}"
+    except socket.timeout:
+        result = f"  {description}: FAILED — socket timeout"
+    except ConnectionRefusedError:
+        result = f"  {description}: FAILED — connection refused"
+    except OSError as e:
+        result = f"  {description}: FAILED — {type(e).__name__}: {e}"
+    finally:
+        if legacy_config:
+            if saved_conf is not None:
+                os.environ["OPENSSL_CONF"] = saved_conf
+            else:
+                os.environ.pop("OPENSSL_CONF", None)
+
+    return result
+
 
 def _run_tls_diagnostics():
     """Gather TLS/runtime diagnostics. Call from lifespan before db_manager.connect()."""
@@ -51,7 +127,6 @@ def _run_tls_diagnostics():
         ctx = ssl.create_default_context()
         lines.append(f"Default TLS ctx: OK, min_version={ctx.minimum_version}")
         lines.append(f"Cipher count: {len(ctx.get_ciphers())}")
-        # List first few ciphers for reference
         for c in ctx.get_ciphers()[:5]:
             lines.append(f"  cipher: {c['name']}")
     except Exception as e:
@@ -152,56 +227,85 @@ def _run_tls_diagnostics():
         logger.info(report)
         return report
 
-    # --- Raw TLS handshake using Python ssl + certifi ---
-    lines.append(f"  Attempting TLS handshake (cafile=certifi, server_hostname={test_host})...")
+    if not ca_path:
+        lines.append("  TLS tests: SKIPPED (no certifi CA path)")
+        report = '\n'.join(lines)
+        logger.info(report)
+        return report
+
+    # --- TLS Handshake Variant Tests ---
+    lines.append("  --- TLS Handshake Variant Tests ---")
+
+    # Test 1: TLS 1.2 with normal settings (no legacy)
+    lines.append(_test_tls_handshake(
+        test_host, test_port, ca_path,
+        "TLS 1.2 (normal)",
+        legacy_config=None,
+    ))
+
+    # Test 2: TLS 1.3 with normal settings
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.settimeout(15)
         sock.connect((test_host, test_port))
-
         ctx = ssl.create_default_context(cafile=ca_path)
         ctx.check_hostname = True
         ctx.verify_mode = ssl.CERT_REQUIRED
-        # Set minimum TLS version to 1.2 (Atlas requirement)
-        ctx.minimum_version = ssl.TLSVersion.TLSv1_2
-
+        ctx.minimum_version = ssl.TLSVersion.TLSv1_3
         tls_sock = ctx.wrap_socket(sock, server_hostname=test_host)
-
-        # Report negotiated parameters
         cipher = tls_sock.cipher()
-        if cipher:
-            lines.append(f"  TLS HANDSHAKE: SUCCESS")
-            lines.append(f"    Negotiated version: {tls_sock.version()}")
-            lines.append(f"    Negotiated cipher: {cipher[0]}")
-            lines.append(f"    Cipher protocol: {cipher[1]}")
-            lines.append(f"    Cipher bits: {cipher[2]}")
-        else:
-            lines.append(f"  TLS HANDSHAKE: SUCCESS (no cipher info)")
+        version = tls_sock.version()
+        tls_sock.close()
+        lines.append(f"  TLS 1.3 (normal): SUCCESS — {version} / {cipher[0] if cipher else 'N/A'}")
+    except ssl.SSLError as e:
+        err_msg = str(e).splitlines()[0] if str(e) else type(e).__name__
+        lines.append(f"  TLS 1.3 (normal): FAILED — {type(e).__name__}: {err_msg[:120]}")
+    except socket.timeout:
+        lines.append(f"  TLS 1.3 (normal): FAILED — socket timeout")
+    except ConnectionRefusedError:
+        lines.append(f"  TLS 1.3 (normal): FAILED — connection refused")
+    except OSError as e:
+        lines.append(f"  TLS 1.3 (normal): FAILED — {type(e).__name__}: {e}")
 
-        # Check peer cert
+    # Test 3: TLS 1.2 with UnsafeLegacyServerConnect (diagnostic only)
+    legacy_conf = _openssl_legacy_config()
+    if legacy_conf:
+        lines.append(f"  Legacy config written: {legacy_conf}")
+        lines.append(_test_tls_handshake(
+            test_host, test_port, ca_path,
+            "TLS 1.2 (UnsafeLegacyServerConnect)",
+            legacy_config=legacy_conf,
+        ))
+        try:
+            os.unlink(legacy_conf)
+        except OSError:
+            pass
+    else:
+        lines.append("  TLS 1.2 (UnsafeLegacyServerConnect): SKIPPED (could not write config)")
+
+    # --- Peer certificate info (from normal TLS 1.2) ---
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(15)
+        sock.connect((test_host, test_port))
+        ctx = ssl.create_default_context(cafile=ca_path)
+        ctx.check_hostname = True
+        ctx.verify_mode = ssl.CERT_REQUIRED
+        ctx.minimum_version = ssl.TLSVersion.TLSv1_2
+        tls_sock = ctx.wrap_socket(sock, server_hostname=test_host)
         cert = tls_sock.getpeercert()
         if cert:
             subject = dict(x[0] for x in cert.get('subject', []))
-            lines.append(f"    Peer cert CN: {subject.get('commonName', 'N/A')}")
-            lines.append(f"    Peer cert SAN: {[x[1] for x in cert.get('subjectAltName', [])][:3]}")
-
+            lines.append(f"  Peer cert CN: {subject.get('commonName', 'N/A')}")
+            lines.append(f"  Peer cert SAN: {[x[1] for x in cert.get('subjectAltName', [])][:3]}")
         tls_sock.close()
-    except ssl.SSLError as e:
-        lines.append(f"  TLS HANDSHAKE: SSL ERROR")
-        lines.append(f"    Exception: {type(e).__name__}")
-        lines.append(f"    Message: {e}")
-        lines.append(f"    Library: {e.library if hasattr(e, 'library') else 'N/A'}")
-        lines.append(f"    Reason: {e.reason if hasattr(e, 'reason') else 'N/A'}")
-    except socket.timeout:
-        lines.append(f"  TLS HANDSHAKE: TIMEOUT")
-    except ConnectionRefusedError:
-        lines.append(f"  TLS HANDSHAKE: CONNECTION REFUSED")
-    except Exception as e:
-        lines.append(f"  TLS HANDSHAKE: ERROR - {type(e).__name__}: {e}")
+    except Exception:
+        pass  # Already reported above
 
     report = '\n'.join(lines)
     logger.info(report)
     return report
+
 
 # For direct execution
 if __name__ == '__main__':
