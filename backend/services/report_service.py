@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Dict, Any, List, Optional
 from fastapi import HTTPException, status
 from backend.config.db import get_attempts_col, get_events_col, get_exams_col, get_users_col, get_questions_col
-from backend.ai.scoring_engine import scoring_engine
+from backend.ai._scoring_engine import scoring_engine
 import logging
 
 logger = logging.getLogger(__name__)

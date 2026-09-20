@@ -1,17 +1,33 @@
 import base64
 import os
 import uuid
-import cv2
-import numpy as np
 from datetime import datetime
 from backend.config.settings import settings
 import logging
 
 logger = logging.getLogger(__name__)
 
-def decode_base64_image(base64_str: str) -> np.ndarray:
+# ---------------------------------------------------------------------------
+# Lazy cv2 / numpy imports – these are only resolved when an image-processing
+# function is actually called, so the FastAPI application can boot on Vercel
+# without the OpenCV native library dependency being satisfied at startup.
+# ---------------------------------------------------------------------------
+
+def _cv2():
+    """Lazy-accessor for cv2. Raises a clear RuntimeError if OpenCV is unavailable."""
+    import cv2
+    return cv2
+
+def _np():
+    """Lazy-accessor for numpy."""
+    import numpy as np
+    return np
+
+def decode_base64_image(base64_str: str):
     """Decodes base64 string (with or without data URI header) into OpenCV BGR image."""
     try:
+        cv2 = _cv2()
+        np = _np()
         if "," in base64_str:
             base64_str = base64_str.split(",", 1)[1]
         img_bytes = base64.b64decode(base64_str)
@@ -22,9 +38,10 @@ def decode_base64_image(base64_str: str) -> np.ndarray:
         logger.error(f"Failed to decode base64 image: {e}")
         return None
 
-def encode_image_to_base64(img: np.ndarray, format: str = ".jpg") -> str:
+def encode_image_to_base64(img, format: str = ".jpg") -> str:
     """Encodes OpenCV image array to base64 JPEG string."""
     try:
+        cv2 = _cv2()
         _, buffer = cv2.imencode(format, img, [cv2.IMWRITE_JPEG_QUALITY, 85])
         base64_str = base64.b64encode(buffer).decode("utf-8")
         return f"data:image/jpeg;base64,{base64_str}"
@@ -32,9 +49,10 @@ def encode_image_to_base64(img: np.ndarray, format: str = ".jpg") -> str:
         logger.error(f"Failed to encode image to base64: {e}")
         return ""
 
-def save_evidence_image(img: np.ndarray, student_id: str, exam_id: str, event_type: str) -> str:
+def save_evidence_image(img, student_id: str, exam_id: str, event_type: str) -> str:
     """Saves OpenCV image to disk in evidence/ directory and returns relative URL path."""
     try:
+        cv2 = _cv2()
         os.makedirs(settings.EVIDENCE_DIR, exist_ok=True)
         timestamp_str = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
         filename = f"{student_id}_{exam_id}_{event_type}_{timestamp_str}_{uuid.uuid4().hex[:6]}.jpg"
@@ -46,17 +64,19 @@ def save_evidence_image(img: np.ndarray, student_id: str, exam_id: str, event_ty
         return ""
 
 def annotate_frame(
-    img: np.ndarray,
+    img,
     detections: list = None,
     head_pose: dict = None,
     events: list = None,
     suspicion_score: int = 0,
     debug_telemetry: dict = None
-) -> np.ndarray:
+):
     """Draws bounding boxes, head pose vectors, and telemetry overlay on frame."""
     if img is None:
         return None
     
+    cv2 = _cv2()
+    np = _np()
     annotated = img.copy()
     h, w, _ = annotated.shape
     

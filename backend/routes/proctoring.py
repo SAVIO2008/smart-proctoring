@@ -5,11 +5,7 @@ from backend.models.schemas import FrameAnalysisRequest, DirectEventLogRequest
 from backend.services.proctoring_service import proctoring_service
 from backend.services.report_service import report_service
 from backend.utils.security import get_current_user
-from backend.utils.image_utils import decode_base64_image
-from backend.ai import face_detector, face_verifier, person_detector
 from backend.config.db import get_events_col, get_users_col
-import cv2
-import numpy as np
 
 router = APIRouter(prefix="/proctoring", tags=["Proctoring"])
 
@@ -33,6 +29,11 @@ def pre_exam_system_check(req: SystemCheckRequest, current_user: Dict[str, Any] 
     """
     Validates webcam feed quality, face presence, lighting sufficiency, and single person count.
     """
+    import cv2
+    import numpy as np
+    from backend.utils.image_utils import decode_base64_image
+    from backend.ai import face_detector
+
     img = decode_base64_image(req.image_base64)
     if img is None:
         return {
@@ -80,6 +81,9 @@ class UpdateFaceReferenceRequest(BaseModel):
 @router.post("/verify-face")
 def verify_face(req: VerifyFaceRequest, current_user: Dict[str, Any] = Depends(get_current_user)):
     """Verifies captured live face against registered student face reference."""
+    from backend.utils.image_utils import decode_base64_image
+    from backend.ai import face_verifier
+
     user_id = current_user.get("_id") or current_user.get("id")
     users_col = get_users_col()
     user_doc = users_col.find_one({"_id": user_id}) or users_col.find_one({"_id": str(user_id)})
@@ -124,6 +128,9 @@ def verify_face(req: VerifyFaceRequest, current_user: Dict[str, Any] = Depends(g
 @router.post("/update-face-reference")
 def update_face_reference(req: UpdateFaceReferenceRequest, current_user: Dict[str, Any] = Depends(get_current_user)):
     """Recalibrate student's baseline face reference image with strict single-face check."""
+    from backend.utils.image_utils import decode_base64_image
+    from backend.ai import face_detector, face_verifier
+
     img = decode_base64_image(req.image_base64)
     if img is None:
         raise HTTPException(status_code=400, detail="Invalid image payload")

@@ -12,11 +12,6 @@ from backend.services.otp_service import otp_service
 from backend.utils.security import get_current_user, get_current_admin, decode_access_token, security_bearer
 from backend.config.settings import settings
 
-from backend.utils.image_utils import decode_base64_image
-from backend.ai import face_detector
-import cv2
-import numpy as np
-
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
 class ValidateFaceRequest(BaseModel):
@@ -28,6 +23,11 @@ def validate_registration_face(req: ValidateFaceRequest):
     Validates a facial snapshot during candidate registration to ensure a single,
     well-lit, clearly detectable face is captured for future biometric identity verification.
     """
+    import cv2
+    import numpy as np
+    from backend.utils.image_utils import decode_base64_image
+    from backend.ai import face_detector
+
     img = decode_base64_image(req.image_base64)
     if img is None:
         return {

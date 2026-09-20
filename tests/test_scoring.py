@@ -1,6 +1,6 @@
 import time
 import pytest
-from backend.ai.scoring_engine import SuspicionScoringEngine
+from backend.ai._scoring_engine import SuspicionScoringEngine
 from backend.models.entities import EventTypeEnum, RiskLevelEnum
 
 def test_scoring_weights_and_risk_levels():

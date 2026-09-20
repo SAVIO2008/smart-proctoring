@@ -48,8 +48,8 @@ def _login(client, email, password):
     return token, {"Authorization": f"Bearer {token}"}, data["user"]
 
 def test_full_system_flow(monkeypatch):
-    from backend.routes import proctoring
-    monkeypatch.setattr(proctoring.face_detector, "detect_faces", lambda img: [{"bbox": [200, 100, 440, 380], "confidence": 0.95, "landmarks": []}])
+    from backend.ai import face_detector
+    monkeypatch.setattr(face_detector, "detect_faces", lambda img: [{"bbox": [200, 100, 440, 380], "confidence": 0.95, "landmarks": []}])
 
     print('\n--- 1. Login Student ---')
     token, headers, user = _login(client, 'student@proctor.edu', 'Student@123')

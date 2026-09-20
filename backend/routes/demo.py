@@ -4,9 +4,6 @@ from backend.models.schemas import DemoSimulateRequest
 from backend.services.proctoring_service import proctoring_service
 from backend.utils.security import get_current_user
 from backend.config.settings import settings
-import numpy as np
-import cv2
-from backend.utils.image_utils import encode_image_to_base64, save_evidence_image, annotate_frame
 
 router = APIRouter(prefix="/demo", tags=["Demo & Viva Simulation Mode"])
 
@@ -47,6 +44,10 @@ def simulate_event(req: DemoSimulateRequest, current_user: Dict[str, Any] = Depe
     Simulates a proctoring detection for live viva demonstration.
     Generates a synthetic annotated evidence snapshot and logs the demo event.
     """
+    import cv2
+    import numpy as np
+    from backend.utils.image_utils import encode_image_to_base64, save_evidence_image, annotate_frame
+
     if not settings.DEMO_MODE_ENABLED:
         raise HTTPException(status_code=403, detail="Demo simulation mode is disabled")
 

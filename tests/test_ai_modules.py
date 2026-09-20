@@ -7,7 +7,7 @@ from backend.ai.gaze_detection import GazeDetector
 from backend.ai.person_detection import PersonPresenceDetector
 from backend.ai.phone_detection import PhoneDetector
 from backend.ai.audio_detection import AudioActivityDetector
-from backend.ai.scoring_engine import SuspicionScoringEngine
+from backend.ai._scoring_engine import SuspicionScoringEngine
 
 def test_face_detector_initialization():
     detector = FaceDetector()
