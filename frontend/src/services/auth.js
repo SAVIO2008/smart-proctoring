@@ -95,10 +95,14 @@ export const auth = {
 
   async deleteAccount() {
     // Verify token exists before making the request.
+    // Use distinct messages so we can tell whether the failure is
+    // client-side (token missing) or server-side (backend rejected).
     const token = api.getToken();
     if (!token) {
-      throw new Error('Authentication credentials not provided');
+      console.warn('[deleteAccount] tokenPresent=false — no JWT in storage');
+      throw new Error('No active session. Please sign in again.');
     }
+    console.warn('[deleteAccount] tokenPresent=true, sending DELETE /auth/me');
     const res = await api.delete('/auth/me');
     api.setToken(null);
     this.setUser(null);

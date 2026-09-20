@@ -29,8 +29,18 @@ class ApiClient {
     };
 
     const token = this.getToken();
+    const hasAuthHeader = !!token;
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    // Non-secret diagnostic: log whether the Authorization header will be
+    // attached for DELETE /auth/me so we can trace the production 401.
+    if (endpoint === '/auth/me' && options.method === 'DELETE') {
+      console.warn(
+        '[api.request] DELETE /auth/me — authorizationHeaderAttached=%s',
+        hasAuthHeader,
+      );
     }
 
     try {
