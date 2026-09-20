@@ -94,6 +94,11 @@ export const auth = {
   },
 
   async deleteAccount() {
+    // Verify token exists before making the request.
+    const token = api.getToken();
+    if (!token) {
+      throw new Error('Authentication credentials not provided');
+    }
     const res = await api.delete('/auth/me');
     api.setToken(null);
     this.setUser(null);

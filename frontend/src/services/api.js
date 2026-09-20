@@ -39,11 +39,19 @@ class ApiClient {
         headers,
       });
 
-      if (response.status === 401 && endpoint !== '/auth/login' && endpoint !== '/auth/login/verify') {
-        // If unauthorized, clear token
+      // Auto-redirect on 401 for most endpoints, but let specific callers
+      // (login, OTP verify, account delete) handle their own auth errors.
+      const _isAuthEndpoint = endpoint === '/auth/login'
+        || endpoint === '/auth/login/verify'
+        || endpoint === '/auth/me';
+
+      if (response.status === 401 && !_isAuthEndpoint) {
+        // If unauthorized on a protected endpoint, clear token and redirect.
         this.setToken(null);
         if (!window.location.pathname.includes('/login') && !window.location.pathname.includes('/register')) {
           window.location.href = '/login';
+          // Stop processing — the redirect handles the UX.
+          return {};
         }
       }
 
