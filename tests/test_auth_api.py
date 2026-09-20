@@ -152,3 +152,62 @@ def test_update_profile_student_and_admin():
     adm_user = admin_update.json()["user"]
     assert adm_user["name"] == "Prof. Charles Xavier"
     assert adm_user["subject"] == "AI & Machine Learning"
+
+
+def test_jwt_persists_to_protected_endpoints():
+    """Regression: after OTP login the JWT must authenticate protected endpoints.
+
+    Verifies that the user created during registration is found by the JWT's
+    ``sub`` claim when the token is presented to /api/exams and /api/auth/me.
+    This guards against _id mismatch (ObjectId vs string) and ephemeral-storage
+    data loss on serverless platforms.
+    """
+    email, reg_data = _register_unique(client, "student")
+    token = reg_data["access_token"]
+    headers = {"Authorization": f"Bearer {token}"}
+
+    # 1. /api/auth/me must return the same user.
+    me = client.get("/api/auth/me", headers=headers)
+    assert me.status_code == 200, f"GET /api/auth/me failed: {me.text}"
+    assert me.json()["email"] == email
+
+    # 2. /api/exams must NOT return "User associated with token no longer exists".
+    exams = client.get("/api/exams", headers=headers)
+    assert exams.status_code == 200, (
+        f"GET /api/exams returned {exams.status_code}: {exams.text}\n"
+        "If the detail is 'User associated with token no longer exists', "
+        "the JWT sub does not match any persisted user."
+    )
+    assert isinstance(exams.json(), list)
+
+    # 3. Full OTP login flow (two-step) must also reach /api/exams.
+    otp_res = _capture_otp(client, email, "Passw0rd!")
+    assert otp_res.status_code == 200, otp_res.text
+    otp_token = otp_res.json()["access_token"]
+    otp_headers = {"Authorization": f"Bearer {otp_token}"}
+
+    me2 = client.get("/api/auth/me", headers=otp_headers)
+    assert me2.status_code == 200
+    assert me2.json()["email"] == email
+
+    exams2 = client.get("/api/exams", headers=otp_headers)
+    assert exams2.status_code == 200, (
+        f"OTP-login GET /api/exams returned {exams2.status_code}: {exams2.text}"
+    )
+    assert isinstance(exams2.json(), list)
+
+
+def test_jwt_user_not_found_is_401():
+    """A tampered JWT with a valid signature but non-existent sub must return 401."""
+    import jwt as pyjwt
+    from backend.config.settings import settings
+
+    fake_token = pyjwt.encode(
+        {"sub": "nonexistent-user-id-xyz", "email": "ghost@proctor.edu", "role": "student"},
+        settings.JWT_SECRET_KEY,
+        algorithm=settings.JWT_ALGORITHM,
+    )
+    headers = {"Authorization": f"Bearer {fake_token}"}
+    res = client.get("/api/exams", headers=headers)
+    assert res.status_code == 401
+    assert "no longer exists" in res.json()["detail"]
